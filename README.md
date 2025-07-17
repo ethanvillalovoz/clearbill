@@ -18,3 +18,8 @@ Provider *
 Aamzon Web Services
 ​
 us-east-2
+
+cd nextjs-clearbill-ai
+npm install @datastax/astra-db-ts langchain openai dotenv
+
+if you run into any error, downgrade langchain to -> "langchain": "^0.1.36",
