@@ -20,6 +20,13 @@ Aamzon Web Services
 us-east-2
 
 cd nextjs-clearbill-ai
+npm install @xenova/transformers
 npm install @datastax/astra-db-ts langchain openai dotenv
 
 if you run into any error, downgrade langchain to -> "langchain": "^0.1.36",
+
+npm i puppeteer
+
+Using this model:
+
+https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3

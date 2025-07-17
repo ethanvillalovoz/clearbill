@@ -82,8 +82,13 @@ async function main() {
             for await (const chunk of chunks) {
                 // Generate embedding for each chunk
                 const output = await embedder(chunk, { pooling: 'mean', normalize: true })
-                const vector = Array.from(output.data)
-
+                // Ensure the vector is a plain array of numbers
+                const vector = Array.from(
+                    Array.isArray(output.data) && Array.isArray(output.data[0])
+                        ? output.data.flat()
+                        : output.data
+                )
+                console.log('Vector type:', typeof vector, 'Is array:', Array.isArray(vector), 'Sample:', vector.slice(0, 5))
                 // Insert into Astra DB
                 const res = await collect.insertOne({
                     $vector: vector,
