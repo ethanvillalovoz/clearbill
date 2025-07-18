@@ -49,19 +49,18 @@ const Home = () => {
                         {/* <LoadingBubble /> */}
                     </>
                 )}
-
-                {/* Chat input form */}
-                <form onSubmit={handleSubmit}>
-                    <input
-                        className="question-box"
-                        onChange={handleInputChange}
-                        value={input}
-                        placeholder="Type your question here..."
-                        disabled={isLoading}
-                    />
-                    <input type="submit" value="Send" disabled={isLoading} />
-                </form>
             </section>
+            {/* Chat input form */}
+            <form onSubmit={handleSubmit}>
+                <input
+                    className="question-box"
+                    onChange={handleInputChange}
+                    value={input}
+                    placeholder="Type your question here..."
+                    disabled={isLoading}
+                />
+                <input type="submit" value="Send" disabled={isLoading} />
+            </form>
         </main>
     )
 }
