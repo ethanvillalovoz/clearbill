@@ -36,7 +36,7 @@ const Home = () => {
                         </p>
                         <br />
                         {/* You can add prompt suggestions here */}
-                        {/* <PromptSuggestionRow /> */}
+                        {/* <PromptSuggestionsRow /> */}
                     </>
                 ) : (
                     // Shown when there are chat messages
