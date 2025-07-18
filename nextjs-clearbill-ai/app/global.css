@@ -35,7 +35,7 @@ main {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;      /* Move content to the top */
     align-items: center;
     padding: 24px 20px;
     text-align: center;
@@ -50,8 +50,9 @@ main {
     align-items: center;
     justify-content: flex-start;
     gap: 14px;
-    margin-top: 0;
-    padding-top: 20px;
+    margin-top: 24px;                /* Move header down a bit */
+    margin-bottom: 16px;
+    width: 100%;
     flex-grow: 0;
 }
 
@@ -93,13 +94,13 @@ section.populated {
     overflow-y: auto;
 }
 
-/* 👇 ADDED THIS: Vertically center welcome text when no messages */
 section:not(.populated) {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;     /* Move welcome text higher */
     align-items: center;
+    padding-top: 40px;               /* Add space above welcome text */
     padding-bottom: 40px;
     text-align: center;
 }
@@ -184,5 +185,57 @@ input[type="submit"]:hover {
 
     input[type="submit"] {
         margin-top: 6px;
+    }
+}
+
+/* --------------------- */
+/* Chat Bubble Styles    */
+/* --------------------- */
+.bubble {
+    margin: 8px;
+    padding: 8px;
+    font-size: 15px;
+    border: none;
+    color: #383838;
+    box-shadow: #959da533 0 8px 24px;
+    width: 80%;
+    text-align: left;
+}
+
+.bubble.user {
+    border-radius: 20px 20px 0 20px;
+    background-color: #E1F4FFFF;
+    margin-left: auto;
+}
+
+.bubble.assistant {
+    border-radius: 20px 20px 20px 0;
+    background-color: #dce7ff;
+}
+
+/* --------------------- */
+/* Loader Animation      */
+/* --------------------- */
+.loader {
+    margin: 10px;
+    width: 60px;
+    aspect-ratio: 4;
+    background: 
+        no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 0 50%,
+        no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 50% 50%,
+        no-repeat radial-gradient(circle closest-side, #383838 90%, #0000) 100% 50%;
+    background-size: calc(100% / 3) 100%;
+    animation: loading 1s infinite linear;
+}
+
+@keyframes loading {
+    33% {
+        background-size: calc(100% / 3) 0, calc(100% / 3) 100%, calc(100% / 3) 100%;
+    }
+    50% {
+        background-size: calc(100% / 3) 100%, calc(100% / 3) 0, calc(100% / 3) 100%;
+    }
+    66% {
+        background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0;
     }
 }
