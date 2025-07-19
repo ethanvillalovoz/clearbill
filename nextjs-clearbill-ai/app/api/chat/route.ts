@@ -1,6 +1,21 @@
+
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@xenova/transformers";
 import fetch from "node-fetch";
+
+// Ensure all required environment variables are set
+const requiredEnv = [
+    'ASTRA_DB_NAMESPACE',
+    'ASTRA_DB_COLLECTION',
+    'ASTRA_DB_API_ENDPOINT',
+    'ASTRA_DB_APPLICATION_TOKEN',
+    'HUGGINGFACE_API_TOKEN'
+];
+for (const key of requiredEnv) {
+    if (!process.env[key]) {
+        throw new Error(`Missing required environment variable: ${key}`);
+    }
+}
 
 // -----------------------------
 // Load environment variables
