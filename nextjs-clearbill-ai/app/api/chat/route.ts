@@ -42,7 +42,7 @@ const embedderPromise = pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2'
 // -----------------------------
 // Helper: Call Hugging Face Chat Completions API
 // -----------------------------
-async function callMistral(data) {
+async function callLlama(data) {
     const response = await fetch(
         "https://router.huggingface.co/v1/chat/completions",
         {
@@ -108,16 +108,16 @@ export async function POST(req: Request) {
                     role: "system",
                     content: `You are a helpful assistant that provides clear and concise answers to questions about medical bills, insurance, and healthcare costs.
 
-Use the following context to inform your responses:
---------------------
-START CONTEXT
-${docContext}
-END CONTEXT
---------------------
+                    Use the following context to inform your responses:
+                    --------------------
+                    START CONTEXT
+                    ${docContext}
+                    END CONTEXT
+                    --------------------
 
-If the context does not contain the answer, respond based on your existing knowledge, but do not reference the source or mention what is or isn't included in the context.
+                    If the context does not contain the answer, respond based on your existing knowledge, but do not reference the source or mention what is or isn't included in the context.
 
-Keep responses accurate, concise, and formatted in plain text. Do not generate images or unnecessary formatting.`
+                    Keep responses accurate, concise, and formatted in plain text. Do not generate images or unnecessary formatting.`
                 },
                 {
                     role: "user",
@@ -130,7 +130,7 @@ Keep responses accurate, concise, and formatted in plain text. Do not generate i
         // -----------------------------
         // Generate response from Hugging Face API
         // -----------------------------
-        const answer = await callMistral(chatData);
+        const answer = await callLlama(chatData);
 
         // -----------------------------
         // Format the answer for better Markdown rendering

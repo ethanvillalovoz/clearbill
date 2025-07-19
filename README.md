@@ -1,36 +1,179 @@
 # ClearBill.AI: The Medical Bill Explainer
-An AI-powered RAG chatbot that explains confusing medical bills.
 
-https://astra.datastax.com
+[![CI](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/clearbill-ai/actions/workflows/ci.yml)
+[![CD](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/cd.yml/badge.svg)](https://github.com/yourusername/clearbill-ai/actions/workflows/cd.yml)
+![License](https://img.shields.io/github/license/ethanvillalovoz/clearbill-ai)
+
+---
+
+## 🩺 Introduction
+
+**ClearBill.AI** is an AI-powered chatbot that helps users understand confusing medical bills. It leverages Retrieval-Augmented Generation (RAG) to provide clear, context-aware explanations using real healthcare data and advanced language models.
+
+---
+
+## 📖 Description
+
+ClearBill.AI combines a vector database (Astra DB), local embeddings, and a large language model (Mistral-7B-Instruct) to answer user questions about medical bills, insurance, and healthcare costs. It scrapes trusted healthcare sources, embeds the content, and uses semantic search to retrieve relevant information for each user query.
+
+---
+
+## 🖼️ Visuals
+
+![ClearBill.AI Chat UI Screenshot](docs/Homepage.png)
+![ClearBill.AI Example Response Screenshot](docs/example.png)
+
+---
+
+## 🛠️ Prerequisites / Requirements
+
+- Node.js v18+
+- npm
+- Astra DB account ([Sign up here](https://astra.datastax.com))
+- Hugging Face account & API token ([Get token](https://huggingface.co))
+- (Optional) Vercel account for deployment
+
+---
+
+## ⚙️ Technologies Used
+
+- **Next.js** (React framework)
+- **TypeScript**
+- **Astra DB** (Vector database)
+- **@xenova/transformers** (Local embeddings)
+- **LangChain** (Text splitting, document loading)
+- **Llama-3.1-8B-Instruct** (LLM via Hugging Face)
+- **Puppeteer** (Web scraping)
+- **react-markdown** (Markdown rendering)
+
+---
 
 
-Get started by creating a database
-Create database
+## 🛠️ Astra DB Configuration
 
-Serverless(vector)
+To use ClearBill.AI, you must set up an Astra DB vector database:
 
-db_ clearbill-ai
+1. **Create a Database**
+   - Go to [Astra DB](https://astra.datastax.com) and click **Create Database**.
+   - Choose **Serverless (vector)** as the database type.
+   - Name your database (e.g., `clearbill-ai`).  
+     *Note: The name cannot be changed later.*
+   - **Provider:** Select **Amazon Web Services**.
+   - **Region:** Select **us-east-2**.
 
-Give it a memorable name – this can’t be changed later.
+2. **Create a Keyspace and Collection**
+   - The `loadDB.ts` script will automatically create the required collection with the correct vector dimension and similarity metric.
 
-Provider *
+3. **Get Your Credentials**
+   - After the database is created, go to the **Connect** tab to find your:
+     - Database ID
+     - Region
+     - Keyspace
+     - Application Token
 
-Aamzon Web Services
-​
-us-east-2
+4. **Set Environment Variables**
+   - Add these values to your `.env` file as shown in the QuickStart section.
 
-cd nextjs-clearbill-ai
-npm install @xenova/transformers
-npm install @datastax/astra-db-ts langchain openai dotenv
+---
 
-if you run into any error, downgrade langchain to -> "langchain": "^0.1.36",
+## 📦 Loading Data with `loadDB.ts`
 
-npm i puppeteer
+ClearBill.AI uses a script to scrape, split, embed, and load healthcare data into Astra DB.  
+You can customize this process to load your own data sources.
 
-Using this model:
+**To use the loader:**
 
-https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
+1. **Edit the URLs**
+   - Open `nextjs-clearbill-ai/scripts/loadDB.ts`.
+   - Update the `clearbillData` array with the URLs you want to scrape and embed.
 
-npm i ai
+2. **Run the Loader**
+   ```sh
+   cd nextjs-clearbill-ai
+   npm run seed
+   ```
+   - This will:
+     - Scrape each URL
+     - Split the content into chunks
+     - Generate embeddings
+     - Insert the chunks and vectors into your Astra DB collection
 
-npm install react-markdown
+**Note:**  
+- The script will create the collection if it does not exist.
+- Make sure your `.env` file is set up with the correct Astra DB credentials before running the script.
+
+---
+
+## 🚀 QuickStart Guide
+
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/yourusername/clearbill-ai.git
+   cd clearbill-ai
+   ```
+
+2. **Install dependencies**
+   ```sh
+   cd nextjs-clearbill-ai
+   npm install @xenova/transformers
+   npm install @datastax/astra-db-ts langchain openai dotenv
+   ```
+
+   *Note: If you run into any errors, downgrade langchain to "langchain": "^0.1.36"*
+
+   ```sh
+   npm i puppeteer
+   npm i ai
+   npm install react-markdown
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the root directory and add your Astra DB and Hugging Face credentials:
+
+   ```env
+   ASTRA_DB_ID=your_astra_db_id
+   ASTRA_DB_REGION=your_astra_db_region
+   ASTRA_DB_KEYSPACE=your_astra_db_keyspace
+   ASTRA_DB_APPLICATION_TOKEN=your_astra_db_application_token
+   HUGGING_FACE_API_KEY=your_hugging_face_api_key
+   ```
+
+4. **Run the development server**
+   ```sh
+   npm run dev
+   ```
+
+5. **Open your browser and navigate to**
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 📚 Usage
+
+- Ask questions about your medical bills, insurance, and healthcare costs.
+- Get clear, context-aware explanations and itemizations.
+- Understand your healthcare expenses better with trusted information.
+
+---
+
+## 🧑‍🤝‍🧑 Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on how to contribute to this project.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- [Astra DB](https://astra.datastax.com) for the vector database
+- [Hugging Face](https://huggingface.co) for the Llama-3.1-8B-Instruct model
+- [Puppeteer](https://pptr.dev) for web scraping
+- [react-markdown](https://github.com/remarkjs/react-markdown) for markdown rendering
