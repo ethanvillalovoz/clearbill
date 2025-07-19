@@ -129,7 +129,7 @@ You can customize this process to load your own data sources.
 
 3. **Set up environment variables**
 
-   Create a `.env` file in the root directory and add your Astra DB and Hugging Face credentials:
+   Create a `.env` file in the `nextjs-clearbill-ai` directory and add your Astra DB and Hugging Face credentials:
 
    ```env
    ASTRA_DB_ID=your_astra_db_id
