@@ -12,25 +12,38 @@ import PromptSuggestionsRow from "./components/PromptSuggestionsRow";
  * Displays the logo, welcome message, chat interface, and handles user input.
  */
 const Home = () => {
-    const [input, setInput] = useState("");
-    const [messages, setMessages] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // -----------------------------
+    // State hooks
+    // -----------------------------
+    const [input, setInput] = useState("");           // User input in the chat box
+    const [messages, setMessages] = useState([]);     // Array of chat messages
+    const [isLoading, setIsLoading] = useState(false);// Loading state for assistant response
 
+    // -----------------------------
+    // Handle input change in chat box
+    // -----------------------------
     const handleInputChange = (e) => setInput(e.target.value);
 
+    // -----------------------------
+    // Handle chat form submission
+    // -----------------------------
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!input.trim()) return;
 
+        // Add user message to chat
         const userMessage = { role: "user", content: input };
         setMessages((prev) => [...prev, userMessage]);
         setIsLoading(true);
 
+        // Send user message and chat history to backend
         const res = await fetch("/api/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ messages: [...messages, userMessage] }),
         });
+
+        // Parse assistant response and add to chat
         const data = await res.json();
         const assistantMessage = {
             role: "assistant",
@@ -41,15 +54,21 @@ const Home = () => {
         setIsLoading(false);
     };
 
+    // -----------------------------
+    // Handle prompt suggestion click
+    // -----------------------------
     const handlePrompt = (promptText) => {
         setInput(promptText);
     };
 
+    // -----------------------------
+    // Render
+    // -----------------------------
     const noMessages = messages.length === 0;
 
     return (
         <main>
-            {/* Header section with logo and intro text */}
+            {/* Header section with logo */}
             <div className="header">
                 <Image
                     src={clearbill_ai_logo}

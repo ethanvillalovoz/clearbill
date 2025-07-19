@@ -202,41 +202,45 @@ input[type="submit"]:hover {
     text-align: left;
 }
 
+/* User bubble (right side) */
 .bubble.user {
     border-radius: 20px 20px 0 20px;
     background-color: #E1F4FFFF;
     margin-left: auto;
 }
 
+/* Assistant bubble (left side) */
 .bubble.assistant {
     border-radius: 20px 20px 20px 0;
     background-color: #dce7ff;
 }
 
+/* Markdown list styles */
 .bubble ul {
-  margin: 0.5em 0 0.5em 1.5em;
-  padding-left: 1.2em;
-  list-style-type: disc;
+    margin: 0.5em 0 0.5em 1.5em;
+    padding-left: 1.2em;
+    list-style-type: disc;
 }
 
 .bubble ol {
-  margin: 0.5em 0 0.5em 1.5em;
-  padding-left: 1.2em;
-  list-style-type: decimal;
+    margin: 0.5em 0 0.5em 1.5em;
+    padding-left: 1.2em;
+    list-style-type: decimal;
 }
 
 .bubble li {
-  margin-bottom: 0.3em;
-  font-size: 1em;
-  line-height: 1.5;
+    margin-bottom: 0.3em;
+    font-size: 1em;
+    line-height: 1.5;
 }
 
 .bubble p {
-  margin: 0.5em 0;
-  font-size: 1em;
-  line-height: 1.6;
+    margin: 0.5em 0;
+    font-size: 1em;
+    line-height: 1.6;
 }
 
+/* Prompt suggestion row and buttons */
 .prompt-suggestion-row {
     width: 100%;
 }

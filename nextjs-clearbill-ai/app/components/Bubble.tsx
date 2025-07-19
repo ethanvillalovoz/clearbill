@@ -1,20 +1,27 @@
-import React from "react"
-import ReactMarkdown from "react-markdown"
+import React from "react";
+import ReactMarkdown from "react-markdown";
 
 /**
- * Chat bubble component.
- * Renders a single chat message with appropriate styling based on the sender's role.
+ * Chat bubble component for ClearBill.AI.
+ * Renders a single chat message with appropriate styling and Markdown support.
  *
- * @param message - The message object containing content and role ("user" or "assistant")
+ * Props:
+ * - message: {
+ *     content: string; // The message text (may include Markdown)
+ *     role: "user" | "assistant"; // Who sent the message
+ *   }
  */
 const Bubble = ({ message }) => {
-    const { content, role } = message
+    const { content, role } = message;
 
     return (
         <div className={`${role} bubble`}>
-            <ReactMarkdown>{content}</ReactMarkdown>
+            {/* Render Markdown content for rich formatting */}
+            <ReactMarkdown>
+                {content}
+            </ReactMarkdown>
         </div>
-    )
-}
+    );
+};
 
 export default Bubble;

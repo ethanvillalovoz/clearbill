@@ -2,7 +2,9 @@ import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@xenova/transformers";
 import fetch from "node-fetch";
 
+// -----------------------------
 // Load environment variables
+// -----------------------------
 const { 
     ASTRA_DB_NAMESPACE, 
     ASTRA_DB_COLLECTION, 
@@ -11,13 +13,20 @@ const {
     HUGGINGFACE_API_TOKEN
 } = process.env;
 
+// -----------------------------
+// Astra DB Client Setup
+// -----------------------------
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
 const db = client.db(ASTRA_DB_API_ENDPOINT, { keyspace: ASTRA_DB_NAMESPACE });
 
-// Initialize embedding pipeline (local)
+// -----------------------------
+// Embedding Pipeline (local)
+// -----------------------------
 const embedderPromise = pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 
-// Helper to call Hugging Face Chat Completions API
+// -----------------------------
+// Helper: Call Hugging Face Chat Completions API
+// -----------------------------
 async function callMistral(data) {
     const response = await fetch(
         "https://router.huggingface.co/v1/chat/completions",
@@ -38,20 +47,28 @@ async function callMistral(data) {
     return result.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
 }
 
+// -----------------------------
+// Main API Route Handler
+// -----------------------------
 export async function POST(req: Request) {
     try {
+        // Parse request body and extract messages
         const body = await req.json();
-        // Fallback: if messages is undefined, use an empty array
         const messages = body.messages ?? [];
         const latestMessage = messages.length > 0 ? messages[messages.length - 1]?.content : "";
 
         let docContext = "";
 
+        // -----------------------------
         // Get embedding for the latest message
+        // -----------------------------
         const embedder = await embedderPromise;
         const output = await embedder(latestMessage, { pooling: 'mean', normalize: true });
         const embedding = Array.from(output.data);
 
+        // -----------------------------
+        // Query Astra DB for relevant documents
+        // -----------------------------
         try {
             const collection = await db.collection(ASTRA_DB_COLLECTION);
             const cursor = collection.find(null, {
@@ -66,9 +83,11 @@ export async function POST(req: Request) {
             docContext = "";
         }
 
-        // Prepare the full data object for chat completion
+        // -----------------------------
+        // Prepare chat completion payload
+        // -----------------------------
         const chatData = { 
-            model: "meta-llama/Llama-3.1-8B-Instruct:nebius", // <-- Use the model string with provider suffix!
+            model: "meta-llama/Llama-3.1-8B-Instruct:nebius", // Use the model string with provider suffix!
             messages: [
                 {
                     role: "system",
@@ -93,31 +112,39 @@ Keep responses accurate, concise, and formatted in plain text. Do not generate i
             stream: false
         };
 
-        // Generate response with the selected model via Hugging Face API
+        // -----------------------------
+        // Generate response from Hugging Face API
+        // -----------------------------
         const answer = await callMistral(chatData);
 
-        // Format the answer for better readability
+        // -----------------------------
+        // Format the answer for better Markdown rendering
+        // -----------------------------
         const formattedAnswer = answer
             // Add a newline before each number or bullet for better Markdown rendering
             .replace(/(\d+\.)/g, '\n$1')
             .replace(/•/g, '\n•');
 
+        // -----------------------------
+        // Return OpenAI-style JSON response
+        // -----------------------------
         return Response.json({
-          id: "chatcmpl-xxx",
-          object: "chat.completion",
-          created: Date.now(),
-          model: "meta-llama/Llama-3.1-8B-Instruct:nebius",
-          choices: [
-            {
-              index: 0,
-              finish_reason: "stop",
-              message: {
-                role: "assistant",
-                content: formattedAnswer
-              }
-            }
-          ]
+            id: "chatcmpl-xxx",
+            object: "chat.completion",
+            created: Date.now(),
+            model: "meta-llama/Llama-3.1-8B-Instruct:nebius",
+            choices: [
+                {
+                    index: 0,
+                    finish_reason: "stop",
+                    message: {
+                        role: "assistant",
+                        content: formattedAnswer
+                    }
+                }
+            ]
         });
+
     } catch (error) {
         console.error("API /api/chat error:", error);
         return new Response("Error: " + error, { status: 500 });
