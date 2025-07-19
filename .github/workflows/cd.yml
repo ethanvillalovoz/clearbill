@@ -23,6 +23,12 @@ jobs:
       - name: Build
         run: npm run build
         working-directory: nextjs-clearbill-ai
+        env:
+          ASTRA_DB_NAMESPACE: ${{ secrets.ASTRA_DB_NAMESPACE }}
+          ASTRA_DB_COLLECTION: ${{ secrets.ASTRA_DB_COLLECTION }}
+          ASTRA_DB_API_ENDPOINT: ${{ secrets.ASTRA_DB_API_ENDPOINT }}
+          ASTRA_DB_APPLICATION_TOKEN: ${{ secrets.ASTRA_DB_APPLICATION_TOKEN }}
+          HUGGINGFACE_API_TOKEN: ${{ secrets.HUGGINGFACE_API_TOKEN }}
 
       # Add your deployment step here. Example for Vercel:
       # - name: Deploy to Vercel
