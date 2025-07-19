@@ -84,7 +84,7 @@ const Home = () => {
                     <>
                         <p className="starter-text">
                             Welcome to ClearBill.AI! Your personal assistant for understanding and managing medical bills.<br />
-                            Ask any question about your healthcare charges, insurance, or billing—I'm here to help you make sense of it all.
+                            Ask any question about your healthcare charges, insurance, or billing—I&apos;m here to help you make sense of it all.
                         </p>
                         <br />
                         {/* Prompt suggestions for quick start */}
