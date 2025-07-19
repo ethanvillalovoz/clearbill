@@ -18,9 +18,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: nextjs-clearbill-ai
 
       - name: Build
         run: npm run build
+        working-directory: nextjs-clearbill-ai
 
       # Add your deployment step here. Example for Vercel:
       # - name: Deploy to Vercel
