@@ -32,3 +32,5 @@ Using this model:
 https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.3
 
 npm i ai
+
+npm install react-markdown

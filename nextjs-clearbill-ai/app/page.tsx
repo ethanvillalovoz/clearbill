@@ -1,37 +1,51 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import clearbill_ai_logo from "./assets/clearbill_ai_logo.png"
-import { useChat } from "ai/react"
-import { Message } from "ai"
-import Bubble from "./components/Bubble"
-import LoadingBubble from "./components/LoadingBubble"
-import PromptSuggestionsRow from "./components/PromptSuggestionsRow"
+import React, { useState } from "react";
+import Image from "next/image";
+import clearbill_ai_logo from "./assets/clearbill_ai_logo.png";
+import Bubble from "./components/Bubble";
+import LoadingBubble from "./components/LoadingBubble";
+import PromptSuggestionsRow from "./components/PromptSuggestionsRow";
 
 /**
  * Home page component for ClearBill.AI.
  * Displays the logo, welcome message, chat interface, and handles user input.
  */
 const Home = () => {
-    // Chat state and handlers from the ai/react hook
-    const { input, handleInputChange, handleSubmit, messages, append, isLoading } = useChat()
+    const [input, setInput] = useState("");
+    const [messages, setMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Determines if there are any chat messages yet
-    const noMessages = !messages || messages.length === 0
+    const handleInputChange = (e) => setInput(e.target.value);
 
-    /**
-     * Handles when a prompt suggestion is clicked.
-     * Appends the prompt as a user message to the chat.
-     * @param promptText - The suggested prompt text
-     */
-    const handlePrompt = (promptText: string) => {
-        const msg: Message = {
-            id: crypto.randomUUID(),
-            content: promptText,
-            role: "user",
-        }
-        append(msg)
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (!input.trim()) return;
+
+        const userMessage = { role: "user", content: input };
+        setMessages((prev) => [...prev, userMessage]);
+        setIsLoading(true);
+
+        const res = await fetch("/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ messages: [...messages, userMessage] }),
+        });
+        const data = await res.json();
+        const assistantMessage = {
+            role: "assistant",
+            content: data.choices?.[0]?.message?.content || "",
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+        setInput("");
+        setIsLoading(false);
+    };
+
+    const handlePrompt = (promptText) => {
+        setInput(promptText);
+    };
+
+    const noMessages = messages.length === 0;
 
     return (
         <main>
@@ -89,7 +103,7 @@ const Home = () => {
                 />
             </form>
         </main>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

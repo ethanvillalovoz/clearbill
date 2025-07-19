@@ -1,4 +1,5 @@
 import React from "react"
+import ReactMarkdown from "react-markdown"
 
 /**
  * Chat bubble component.
@@ -11,7 +12,7 @@ const Bubble = ({ message }) => {
 
     return (
         <div className={`${role} bubble`}>
-            {content}
+            <ReactMarkdown>{content}</ReactMarkdown>
         </div>
     )
 }
