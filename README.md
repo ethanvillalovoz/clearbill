@@ -14,7 +14,7 @@
 
 ## 📖 Description
 
-ClearBill.AI combines a vector database (Astra DB), local embeddings, and a large language model (Mistral-7B-Instruct) to answer user questions about medical bills, insurance, and healthcare costs. It scrapes trusted healthcare sources, embeds the content, and uses semantic search to retrieve relevant information for each user query.
+ClearBill.AI combines a vector database (Astra DB), local embeddings, and a large language model (Llama-3.1-8B-Instruct) to answer user questions about medical bills, insurance, and healthcare costs. It scrapes trusted healthcare sources, embeds the content, and uses semantic search to retrieve relevant information for each user query.
 
 ---
 
@@ -115,16 +115,7 @@ You can customize this process to load your own data sources.
 2. **Install dependencies**
    ```sh
    cd nextjs-clearbill-ai
-   npm install @xenova/transformers
-   npm install @datastax/astra-db-ts langchain openai dotenv
-   ```
-
-   *Note: If you run into any errors, downgrade langchain to "langchain": "^0.1.36"*
-
-   ```sh
-   npm i puppeteer
-   npm i ai
-   npm install react-markdown
+   npm install
    ```
 
 3. **Set up environment variables**
@@ -132,19 +123,25 @@ You can customize this process to load your own data sources.
    Create a `.env` file in the `nextjs-clearbill-ai` directory and add your Astra DB and Hugging Face credentials:
 
    ```env
-   ASTRA_DB_ID=your_astra_db_id
-   ASTRA_DB_REGION=your_astra_db_region
-   ASTRA_DB_KEYSPACE=your_astra_db_keyspace
+   ASTRA_DB_NAMESPACE=your_astra_db_keyspace
+   ASTRA_DB_COLLECTION=your_collection_name
+   ASTRA_DB_API_ENDPOINT=your_astra_db_api_endpoint
    ASTRA_DB_APPLICATION_TOKEN=your_astra_db_application_token
-   HUGGING_FACE_API_KEY=your_hugging_face_api_key
+   HUGGINGFACE_API_TOKEN=your_hugging_face_api_key
    ```
 
-4. **Run the development server**
+4. **Seed the database**
+   Run the seed script to scrape data and populate your vector database:
+   ```sh
+   npm run seed
+   ```
+
+5. **Run the development server**
    ```sh
    npm run dev
    ```
 
-5. **Open your browser and navigate to**
+6. **Open your browser and navigate to**
    ```
    http://localhost:3000
    ```
