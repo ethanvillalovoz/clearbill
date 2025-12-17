@@ -1,5 +1,5 @@
 import { DataAPIClient } from '@datastax/astra-db-ts'
-import { PuppeteerWebBaseLoader } from 'langchain/document_loaders/web/puppeteer'
+import { PuppeteerWebBaseLoader } from '@langchain/community/document_loaders/web/puppeteer'
 import { pipeline } from '@xenova/transformers'
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter'
 import "dotenv/config"
@@ -14,6 +14,10 @@ const {
     ASTRA_DB_API_ENDPOINT, 
     ASTRA_DB_APPLICATION_TOKEN
 } = process.env
+
+if (!ASTRA_DB_NAMESPACE || !ASTRA_DB_COLLECTION || !ASTRA_DB_API_ENDPOINT || !ASTRA_DB_APPLICATION_TOKEN) {
+    throw new Error("Missing required environment variables.");
+}
 
 // Initialize Astra DB client and database
 const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN)
@@ -57,7 +61,7 @@ async function main() {
      * @param similarityMetric - The similarity metric to use for vector search.
      */
     const createCollection = async (similarityMetric: SimilarityMetric = "dot_product") => {
-        const res = await db.createCollection(ASTRA_DB_COLLECTION, {
+        const res = await db.createCollection(ASTRA_DB_COLLECTION!, {
             vector: {
                 dimension: 384, // Must match the embedding model output dimension
                 metric: similarityMetric,
@@ -70,7 +74,7 @@ async function main() {
      * Scrape, split, embed, and insert data from all URLs.
      */
     const loadSampleData = async () => {
-        const collect = await db.collection(ASTRA_DB_COLLECTION)
+        const collect = await db.collection(ASTRA_DB_COLLECTION!)
         for await (const url of clearbillData) {
             console.log(`Scraping: ${url}`)
             const content = await scrapePage(url)
@@ -112,7 +116,7 @@ async function main() {
             gotoOptions: {
                 waitUntil: 'domcontentloaded'
             },
-            evaluate: async (page, browser) => {
+            evaluate: async (page: any, browser: any) => {
                 const result = await page.evaluate(() => document.body.innerHTML)
                 await browser.close()
                 return result
