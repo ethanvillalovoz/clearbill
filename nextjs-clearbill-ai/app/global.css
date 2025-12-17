@@ -115,8 +115,9 @@ form {
     padding-top: 16px;
     border-top: 1px solid #ccc;
     background-color: transparent;
-    height: 48px;
+    height: 64px;
     gap: 0;
+    flex-shrink: 0;
 }
 
 input.question-box {
