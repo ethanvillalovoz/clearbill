@@ -1,7 +1,6 @@
 
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@xenova/transformers";
-import fetch from "node-fetch";
 
 // Ensure all required environment variables are set
 const requiredEnv = [
