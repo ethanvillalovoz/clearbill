@@ -90,8 +90,14 @@ section.populated {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     overflow-y: auto;
+}
+
+.messages-wrapper {
+    margin-top: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 section:not(.populated) {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import clearbill_ai_logo from "./assets/clearbill_ai_logo.png";
 import Bubble from "./components/Bubble";
@@ -18,6 +18,16 @@ const Home = () => {
     const [input, setInput] = useState("");           // User input in the chat box
     const [messages, setMessages] = useState([]);     // Array of chat messages
     const [isLoading, setIsLoading] = useState(false);// Loading state for assistant response
+
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages, isLoading]);
 
     // -----------------------------
     // Handle input change in chat box
@@ -92,7 +102,7 @@ const Home = () => {
                     </>
                 ) : (
                     // Shown when there are chat messages
-                    <>
+                    <div className="messages-wrapper">
                         {/* Render chat messages as bubbles */}
                         {messages.map((message, index) => (
                             <Bubble
@@ -102,7 +112,8 @@ const Home = () => {
                         ))}
                         {/* Show loading indicator while waiting for response */}
                         {isLoading && <LoadingBubble />}
-                    </>
+                        <div ref={messagesEndRef} />
+                    </div>
                 )}
             </section>
 
