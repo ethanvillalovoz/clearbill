@@ -16,7 +16,7 @@ ClearBill.AI is a medical bill explainer built with Next.js, Astra DB vector sea
 
 - Answers user questions through a chat interface focused on medical bills and insurance terminology.
 - Retrieves relevant healthcare billing context from an Astra DB vector collection.
-- Generates local query embeddings with `@xenova/transformers`.
+- Generates local query embeddings with `@huggingface/transformers`.
 - Calls the Hugging Face chat completions router with `meta-llama/Llama-3.1-8B-Instruct:nebius`.
 - Renders assistant responses with Markdown support for clearer explanations.
 
@@ -24,7 +24,7 @@ ClearBill.AI is a medical bill explainer built with Next.js, Astra DB vector sea
 
 - **Framework:** Next.js, React, TypeScript
 - **Retrieval:** Astra DB vector search
-- **Embeddings:** `@xenova/transformers`
+- **Embeddings:** `@huggingface/transformers`
 - **LLM:** Hugging Face chat completions router
 - **Data ingestion:** Puppeteer, local text chunking
 - **UI rendering:** `react-markdown`

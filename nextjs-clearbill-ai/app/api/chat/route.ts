@@ -1,5 +1,5 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
-import { pipeline } from "@xenova/transformers";
+import { pipeline } from "@huggingface/transformers";
 
 const CHAT_MODEL = "meta-llama/Llama-3.1-8B-Instruct:nebius";
 const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";

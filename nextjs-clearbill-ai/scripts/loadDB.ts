@@ -1,5 +1,5 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
-import { pipeline } from "@xenova/transformers";
+import { pipeline } from "@huggingface/transformers";
 import "dotenv/config";
 import puppeteer from "puppeteer";
 
