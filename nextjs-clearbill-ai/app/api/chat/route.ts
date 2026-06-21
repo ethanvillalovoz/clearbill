@@ -1,52 +1,93 @@
-
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@xenova/transformers";
 
-// Ensure all required environment variables are set
-const requiredEnv = [
-    'ASTRA_DB_NAMESPACE',
-    'ASTRA_DB_COLLECTION',
-    'ASTRA_DB_API_ENDPOINT',
-    'ASTRA_DB_APPLICATION_TOKEN',
-    'HUGGINGFACE_API_TOKEN'
-];
-for (const key of requiredEnv) {
-    if (!process.env[key]) {
-        throw new Error(`Missing required environment variable: ${key}`);
+const CHAT_MODEL = "meta-llama/Llama-3.1-8B-Instruct:nebius";
+const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";
+const REQUIRED_ENV_KEYS = [
+    "ASTRA_DB_NAMESPACE",
+    "ASTRA_DB_COLLECTION",
+    "ASTRA_DB_API_ENDPOINT",
+    "ASTRA_DB_APPLICATION_TOKEN",
+    "HUGGINGFACE_API_TOKEN",
+] as const;
+
+type RequiredEnv = Record<(typeof REQUIRED_ENV_KEYS)[number], string>;
+type HuggingFaceChatMessage = {
+    role: "system" | "user" | "assistant";
+    content: string;
+};
+
+type HuggingFaceChatRequest = {
+    model: string;
+    messages: HuggingFaceChatMessage[];
+    stream: false;
+};
+
+type HuggingFaceChatResponse = {
+    choices?: Array<{
+        message?: {
+            content?: string;
+        };
+    }>;
+};
+
+type FeatureExtractionPipeline = (
+    input: string,
+    options: { pooling: "mean"; normalize: boolean }
+) => Promise<{ data: Iterable<number> }>;
+
+let embedderPromise: ReturnType<typeof pipeline> | null = null;
+
+function getRequiredEnv(): RequiredEnv {
+    const values = {} as RequiredEnv;
+
+    for (const key of REQUIRED_ENV_KEYS) {
+        const value = process.env[key];
+        if (!value) {
+            throw new Error(`Missing required environment variable: ${key}`);
+        }
+        values[key] = value;
     }
+
+    return values;
 }
 
-// -----------------------------
-// Load environment variables
-// -----------------------------
-const { 
-    ASTRA_DB_NAMESPACE, 
-    ASTRA_DB_COLLECTION, 
-    ASTRA_DB_API_ENDPOINT, 
-    ASTRA_DB_APPLICATION_TOKEN,
-    HUGGINGFACE_API_TOKEN
-} = process.env;
+function getAstraDb(env: RequiredEnv) {
+    const client = new DataAPIClient(env.ASTRA_DB_APPLICATION_TOKEN);
+    return client.db(env.ASTRA_DB_API_ENDPOINT, {
+        keyspace: env.ASTRA_DB_NAMESPACE,
+    });
+}
 
-// -----------------------------
-// Astra DB Client Setup
-// -----------------------------
-const client = new DataAPIClient(ASTRA_DB_APPLICATION_TOKEN);
-const db = client.db(ASTRA_DB_API_ENDPOINT, { keyspace: ASTRA_DB_NAMESPACE });
+function getEmbedder() {
+    embedderPromise ??= pipeline("feature-extraction", EMBEDDING_MODEL);
+    return embedderPromise;
+}
 
-// -----------------------------
-// Embedding Pipeline (local)
-// -----------------------------
-const embedderPromise = pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+function getLatestMessage(messages: unknown): string {
+    if (!Array.isArray(messages)) {
+        return "";
+    }
 
-// -----------------------------
-// Helper: Call Hugging Face Chat Completions API
-// -----------------------------
-async function callLlama(data) {
+    const latestMessage = messages.at(-1);
+    if (
+        typeof latestMessage === "object" &&
+        latestMessage !== null &&
+        "content" in latestMessage &&
+        typeof latestMessage.content === "string"
+    ) {
+        return latestMessage.content;
+    }
+
+    return "";
+}
+
+async function callLlama(data: HuggingFaceChatRequest, token: string) {
     const response = await fetch(
         "https://router.huggingface.co/v1/chat/completions",
         {
             headers: {
-                Authorization: `Bearer ${HUGGINGFACE_API_TOKEN}`,
+                Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
             method: "POST",
@@ -57,51 +98,40 @@ async function callLlama(data) {
         const text = await response.text();
         throw new Error(`Hugging Face API error: ${response.status} ${response.statusText} - ${text}`);
     }
-    const result = await response.json();
+
+    const result = (await response.json()) as HuggingFaceChatResponse;
     return result.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
 }
 
-// -----------------------------
-// Main API Route Handler
-// -----------------------------
 export async function POST(req: Request) {
     try {
-        // Parse request body and extract messages
-        const body = await req.json();
-        const messages = body.messages ?? [];
-        const latestMessage = messages.length > 0 ? messages[messages.length - 1]?.content : "";
+        const env = getRequiredEnv();
+        const db = getAstraDb(env);
+        const body = (await req.json()) as { messages?: unknown };
+        const latestMessage = getLatestMessage(body.messages);
 
         let docContext = "";
 
-        // -----------------------------
-        // Get embedding for the latest message
-        // -----------------------------
-        const embedder = await embedderPromise;
-        const output = await embedder(latestMessage, { pooling: 'mean', normalize: true });
+        const embedder = (await getEmbedder()) as unknown as FeatureExtractionPipeline;
+        const output = await embedder(latestMessage, { pooling: "mean", normalize: true });
         const embedding = Array.from(output.data);
 
-        // -----------------------------
-        // Query Astra DB for relevant documents
-        // -----------------------------
         try {
-            const collection = await db.collection(ASTRA_DB_COLLECTION);
+            const collection = await db.collection(env.ASTRA_DB_COLLECTION);
             const cursor = collection.find(null, {
                 sort: { $vector: embedding },
-                limit: 10
+                limit: 10,
             });
             const documents = await cursor.toArray();
-            const docsMap = documents?.map(doc => doc.text);
+            const docsMap = documents?.map((doc) => doc.text);
             docContext = JSON.stringify(docsMap);
         } catch (error) {
             console.log("Error querying Astra DB:", error);
             docContext = "";
         }
 
-        // -----------------------------
-        // Prepare chat completion payload
-        // -----------------------------
-        const chatData = { 
-            model: "meta-llama/Llama-3.1-8B-Instruct:nebius", // Use the model string with provider suffix!
+        const chatData: HuggingFaceChatRequest = {
+            model: CHAT_MODEL,
             messages: [
                 {
                     role: "system",
@@ -120,43 +150,33 @@ export async function POST(req: Request) {
                 },
                 {
                     role: "user",
-                    content: latestMessage
-                }
+                    content: latestMessage,
+                },
             ],
-            stream: false
+            stream: false,
         };
 
-        // -----------------------------
-        // Generate response from Hugging Face API
-        // -----------------------------
-        const answer = await callLlama(chatData);
+        const answer = await callLlama(chatData, env.HUGGINGFACE_API_TOKEN);
 
-        // -----------------------------
-        // Format the answer for better Markdown rendering
-        // -----------------------------
         const formattedAnswer = answer
-            // Add a newline before each number or bullet for better Markdown rendering
-            .replace(/(\d+\.)/g, '\n$1')
-            .replace(/•/g, '\n•');
+            .replace(/(\d+\.)/g, "\n$1")
+            .replace(/•/g, "\n•");
 
-        // -----------------------------
-        // Return OpenAI-style JSON response
-        // -----------------------------
         return Response.json({
             id: "chatcmpl-xxx",
             object: "chat.completion",
             created: Date.now(),
-            model: "meta-llama/Llama-3.1-8B-Instruct:nebius",
+            model: CHAT_MODEL,
             choices: [
                 {
                     index: 0,
                     finish_reason: "stop",
                     message: {
                         role: "assistant",
-                        content: formattedAnswer
-                    }
-                }
-            ]
+                        content: formattedAnswer,
+                    },
+                },
+            ],
         });
 
     } catch (error) {

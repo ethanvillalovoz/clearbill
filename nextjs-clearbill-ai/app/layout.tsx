@@ -1,28 +1,20 @@
-import "./global.css"
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import "./global.css";
 
-/**
- * Metadata for the application.
- * Used by Next.js for SEO and browser tab info.
- */
-export const metadata = {
+export const metadata: Metadata = {
     title: "ClearBill.AI",
-    description: "AI-powered bill management",
-}
+    description: "AI assistant for explaining medical bills, insurance terms, and healthcare charges.",
+};
 
-/**
- * Root layout component for the app.
- * Wraps all pages and components with HTML and body tags.
- *
- * @param children - React children components to render inside the layout.
- */
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
+const RootLayout = ({ children }: { children: ReactNode }) => {
     return (
         <html lang="en">
             <body>
                 {children}
             </body>
         </html>
-    )
-}
+    );
+};
 
-export default RootLayout
+export default RootLayout;

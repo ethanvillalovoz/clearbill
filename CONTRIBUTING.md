@@ -3,33 +3,67 @@
 
 > Thank you for your interest in contributing! Your help makes ClearBill.AI better for everyone.
 
-## How to Contribute
+## Before You Start
 
-### 1. Issues
-- **Bug Reports:** Please include clear steps to reproduce, expected vs. actual behavior, and screenshots/logs if possible.
-- **Feature Requests:** Describe the feature, why it would be useful, and any ideas for implementation.
+- Do not commit API keys, `.env` files, medical bills, patient records, or protected health information.
+- Open an issue first for major product, architecture, dependency, or data-ingestion changes.
+- Keep pull requests focused so they are easy to review.
 
-### 2. Pull Requests
-- Fork the repository and create your branch from `main`.
-- Add your changes with clear, descriptive commit messages.
-- If your change is UI-related, include screenshots or GIFs.
-- Ensure your code passes linting and builds successfully (`npm run lint` and `npm run build`).
-- Reference related issues in your PR description (e.g., `closes #123`).
-- Fill out the PR template if available.
+## Local Setup
 
-### 3. Code Style
-- Follow the existing code style and structure.
-- Use descriptive variable and function names.
-- Add comments where helpful.
+```sh
+git clone https://github.com/ethanvillalovoz/clearbill-ai.git
+cd clearbill-ai/nextjs-clearbill-ai
+npm ci
+cp .env.example .env
+```
 
-### 4. Community Guidelines
-- Be respectful and inclusive in all interactions.
-- Provide constructive feedback and be open to it in return.
+Fill in `.env` with your Astra DB and Hugging Face credentials.
 
-### 5. Useful Links
-- [README.md](./README.md) — Project overview and setup
-- [GitHub Issues](./.github/ISSUE_TEMPLATE/) — Report bugs or request features
+## Development Checks
 
----
+Run these commands before opening a pull request:
 
-Thank you for helping make ClearBill.AI awesome!
+```sh
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Use `npm run seed` only when you intentionally want to scrape configured source URLs and write embeddings into Astra DB.
+
+## Issues
+
+For bug reports, include:
+
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Browser, OS, and Node.js version
+- Screenshots or logs when useful
+
+For feature requests, include:
+
+- The user problem
+- The proposed behavior
+- Any tradeoffs or alternatives you considered
+
+## Pull Requests
+
+- Create your branch from `main`.
+- Use clear commit messages.
+- Update documentation when setup, behavior, or environment variables change.
+- Include screenshots for visible UI changes.
+- Reference related issues with `closes #123` when applicable.
+- Confirm that lint, typecheck, and build pass locally.
+
+## Code Style
+
+- Prefer simple, typed TypeScript over clever abstractions.
+- Keep API route side effects inside request handlers or lazy helpers.
+- Add comments only where the code is not self-explanatory.
+- Keep generated files, secrets, and local build artifacts out of version control.
+
+## Community Guidelines
+
+Be respectful, constructive, and specific. This project touches healthcare billing concepts, so clarity and user safety matter.

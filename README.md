@@ -1,176 +1,165 @@
-# ClearBill.AI: The Medical Bill Explainer
+# ClearBill.AI
 
-[![CI](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/yourusername/clearbill-ai/actions/workflows/ci.yml)
-[![CD](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/cd.yml/badge.svg)](https://github.com/yourusername/clearbill-ai/actions/workflows/cd.yml)
+[![CI](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml)
 ![License](https://img.shields.io/github/license/ethanvillalovoz/clearbill-ai)
 
----
+ClearBill.AI is a medical bill explainer built with Next.js, Astra DB vector search, local embeddings, and a Hugging Face-hosted Llama model. It uses retrieval-augmented generation to answer questions about billing language, insurance terms, healthcare charges, and common patient billing workflows.
 
-## 🩺 Introduction
+> ClearBill.AI is an educational project, not medical, legal, insurance, or financial advice. Do not upload real patient health information or sensitive billing records unless you have reviewed the deployment, data handling, and compliance requirements for your use case.
 
-**ClearBill.AI** is an AI-powered chatbot that helps users understand confusing medical bills. It leverages Retrieval-Augmented Generation (RAG) to provide clear, context-aware explanations using real healthcare data and advanced language models.
+## Screenshots
 
----
+![ClearBill.AI homepage](docs/Homepage.png)
+![ClearBill.AI example response](docs/example.png)
 
-## 📖 Description
+## What It Does
 
-ClearBill.AI combines a vector database (Astra DB), local embeddings, and a large language model (Llama-3.1-8B-Instruct) to answer user questions about medical bills, insurance, and healthcare costs. It scrapes trusted healthcare sources, embeds the content, and uses semantic search to retrieve relevant information for each user query.
+- Answers user questions through a chat interface focused on medical bills and insurance terminology.
+- Retrieves relevant healthcare billing context from an Astra DB vector collection.
+- Generates local query embeddings with `@xenova/transformers`.
+- Calls the Hugging Face chat completions router with `meta-llama/Llama-3.1-8B-Instruct:nebius`.
+- Renders assistant responses with Markdown support for clearer explanations.
 
----
+## Tech Stack
 
-## 🖼️ Visuals
+- **Framework:** Next.js, React, TypeScript
+- **Retrieval:** Astra DB vector search
+- **Embeddings:** `@xenova/transformers`
+- **LLM:** Hugging Face chat completions router
+- **Data ingestion:** Puppeteer, local text chunking
+- **UI rendering:** `react-markdown`
 
-![ClearBill.AI Chat UI Screenshot](docs/Homepage.png)
-![ClearBill.AI Example Response Screenshot](docs/example.png)
+## Architecture
 
----
+```text
+Healthcare source URLs
+        |
+        v
+scripts/loadDB.ts
+        |
+        v
+Puppeteer scrape -> local text chunks -> local embeddings -> Astra DB vector collection
+        |
+        v
+User question -> local query embedding -> vector search -> retrieved context
+        |
+        v
+Hugging Face chat completion -> Markdown response -> Next.js chat UI
+```
 
-## 🛠️ Prerequisites / Requirements
+## Repository Layout
 
-- Node.js v18+
+```text
+.
+├── docs/                    # Screenshots and project documentation
+├── nextjs-clearbill-ai/      # Next.js application
+│   ├── app/                  # App Router pages, components, and API route
+│   ├── scripts/loadDB.ts     # Data loading script for Astra DB
+│   └── .env.example          # Required environment variables
+├── .github/                  # CI, issue templates, and PR template
+├── CONTRIBUTING.md
+├── LICENSE
+└── README.md
+```
+
+## Prerequisites
+
+- Node.js 20+
 - npm
-- Astra DB account ([Sign up here](https://astra.datastax.com))
-- Hugging Face account & API token ([Get token](https://huggingface.co))
-- (Optional) Vercel account for deployment
+- Astra DB serverless vector database
+- Hugging Face account and API token
 
----
+## Quick Start
 
-## ⚙️ Technologies Used
+1. Clone the repository.
 
-- **Next.js** (React framework)
-- **TypeScript**
-- **Astra DB** (Vector database)
-- **@xenova/transformers** (Local embeddings)
-- **LangChain** (Text splitting, document loading)
-- **Llama-3.1-8B-Instruct** (LLM via Hugging Face)
-- **Puppeteer** (Web scraping)
-- **react-markdown** (Markdown rendering)
-
----
-
-
-## 🛠️ Astra DB Configuration
-
-To use ClearBill.AI, you must set up an Astra DB vector database:
-
-1. **Create a Database**
-   - Go to [Astra DB](https://astra.datastax.com) and click **Create Database**.
-   - Choose **Serverless (vector)** as the database type.
-   - Name your database (e.g., `clearbill-ai`).  
-     *Note: The name cannot be changed later.*
-   - **Provider:** Select **Amazon Web Services**.
-   - **Region:** Select **us-east-2**.
-
-2. **Create a Keyspace and Collection**
-   - The `loadDB.ts` script will automatically create the required collection with the correct vector dimension and similarity metric.
-
-3. **Get Your Credentials**
-   - After the database is created, go to the **Connect** tab to find your:
-     - Database ID
-     - Region
-     - Keyspace
-     - Application Token
-
-4. **Set Environment Variables**
-   - Add these values to your `.env` file as shown in the QuickStart section.
-
----
-
-## 📦 Loading Data with `loadDB.ts`
-
-ClearBill.AI uses a script to scrape, split, embed, and load healthcare data into Astra DB.  
-You can customize this process to load your own data sources.
-
-**To use the loader:**
-
-1. **Edit the URLs**
-   - Open `nextjs-clearbill-ai/scripts/loadDB.ts`.
-   - Update the `clearbillData` array with the URLs you want to scrape and embed.
-
-2. **Run the Loader**
    ```sh
-   cd nextjs-clearbill-ai
-   npm run seed
-   ```
-   - This will:
-     - Scrape each URL
-     - Split the content into chunks
-     - Generate embeddings
-     - Insert the chunks and vectors into your Astra DB collection
-
-**Note:**  
-- The script will create the collection if it does not exist.
-- Make sure your `.env` file is set up with the correct Astra DB credentials before running the script.
-
----
-
-## 🚀 QuickStart Guide
-
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/yourusername/clearbill-ai.git
-   cd clearbill-ai
+   git clone https://github.com/ethanvillalovoz/clearbill-ai.git
+   cd clearbill-ai/nextjs-clearbill-ai
    ```
 
-2. **Install dependencies**
+2. Install dependencies.
+
    ```sh
-   cd nextjs-clearbill-ai
-   npm install
+   npm ci
    ```
 
-3. **Set up environment variables**
+3. Create your local environment file.
 
-   Create a `.env` file in the `nextjs-clearbill-ai` directory and add your Astra DB and Hugging Face credentials:
+   ```sh
+   cp .env.example .env
+   ```
+
+4. Fill in `.env`.
 
    ```env
    ASTRA_DB_NAMESPACE=your_astra_db_keyspace
-   ASTRA_DB_COLLECTION=your_collection_name
+   ASTRA_DB_COLLECTION=your_astra_db_collection
    ASTRA_DB_API_ENDPOINT=your_astra_db_api_endpoint
    ASTRA_DB_APPLICATION_TOKEN=your_astra_db_application_token
-   HUGGINGFACE_API_TOKEN=your_hugging_face_api_key
+   HUGGINGFACE_API_TOKEN=your_hugging_face_api_token
    ```
 
-4. **Seed the database**
-   Run the seed script to scrape data and populate your vector database:
+5. Seed Astra DB with source content.
+
    ```sh
+   npm run browsers:install
    npm run seed
    ```
 
-5. **Run the development server**
+6. Start the development server.
+
    ```sh
    npm run dev
    ```
 
-6. **Open your browser and navigate to**
-   ```
-   http://localhost:3000
-   ```
+7. Open [http://localhost:3000](http://localhost:3000).
 
----
+## Astra DB Setup
 
-## 📚 Usage
+1. Create a serverless vector database in [Astra DB](https://astra.datastax.com).
+2. Create or choose a keyspace for ClearBill.AI.
+3. Copy the API endpoint and application token from the Astra DB connection settings.
+4. Set `ASTRA_DB_COLLECTION` to the collection name you want the seed script to create/use.
 
-- Ask questions about your medical bills, insurance, and healthcare costs.
-- Get clear, context-aware explanations and itemizations.
-- Understand your healthcare expenses better with trusted information.
+The seed script creates a vector collection configured for the local embedding model and inserts scraped content chunks with their embeddings.
 
----
+## Data Loading
 
-## 🧑‍🤝‍🧑 Contributing
+The loader lives at `nextjs-clearbill-ai/scripts/loadDB.ts`.
 
-We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for details on how to contribute to this project.
+To change the source corpus, update the `clearbillData` URL array in that file, then run:
 
----
+```sh
+npm run browsers:install
+npm run seed
+```
 
-## 📄 License
+The browser install step is only needed before the first seed run or when you want Puppeteer to refresh its local browser binary. The loader scrapes each URL, splits the page text into overlapping chunks, embeds each chunk, and inserts the result into Astra DB.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Scripts
 
----
+Run these commands from `nextjs-clearbill-ai/`.
 
-## 🙏 Acknowledgments
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the local Next.js dev server |
+| `npm run build` | Build the production app |
+| `npm run start` | Start the production build |
+| `npm run browsers:install` | Install the local browser binary used by Puppeteer |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Run TypeScript checks |
+| `npm test` | Alias for `npm run typecheck` |
+| `npm run seed` | Scrape, embed, and load content into Astra DB |
 
-- [Astra DB](https://astra.datastax.com) for the vector database
-- [Hugging Face](https://huggingface.co) for the Llama-3.1-8B-Instruct model
-- [Puppeteer](https://pptr.dev) for web scraping
-- [react-markdown](https://github.com/remarkjs/react-markdown) for markdown rendering
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
+
+## Security
+
+Please do not commit secrets, tokens, `.env` files, real medical bills, or protected health information. See [SECURITY.md](SECURITY.md) for responsible disclosure guidance.
+
+## License
+
+This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.

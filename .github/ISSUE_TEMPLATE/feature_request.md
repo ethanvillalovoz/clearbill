@@ -1,5 +1,5 @@
 ---
-name: "✨ Feature Request"
+name: "Feature Request"
 about: Suggest an idea for this project
 labels: enhancement
 ---
@@ -15,3 +15,6 @@ A clear and concise description of any alternative solutions or features you've 
 
 **Additional context**
 Add any other context or screenshots about the feature request here.
+
+**Data and safety considerations**
+Does this feature touch user billing data, scraped sources, PHI, credentials, or model output quality? If so, describe the risk and mitigation.

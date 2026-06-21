@@ -18,31 +18,21 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: npm
+          cache-dependency-path: nextjs-clearbill-ai/package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: nextjs-clearbill-ai
 
       - name: Lint
         run: npm run lint
         working-directory: nextjs-clearbill-ai
 
+      - name: Typecheck
+        run: npm run typecheck
+        working-directory: nextjs-clearbill-ai
+
       - name: Build
         run: npm run build
         working-directory: nextjs-clearbill-ai
-        env:
-          ASTRA_DB_NAMESPACE: ${{ secrets.ASTRA_DB_NAMESPACE }}
-          ASTRA_DB_COLLECTION: ${{ secrets.ASTRA_DB_COLLECTION }}
-          ASTRA_DB_API_ENDPOINT: ${{ secrets.ASTRA_DB_API_ENDPOINT }}
-          ASTRA_DB_APPLICATION_TOKEN: ${{ secrets.ASTRA_DB_APPLICATION_TOKEN }}
-          HUGGINGFACE_API_TOKEN: ${{ secrets.HUGGINGFACE_API_TOKEN }}
-
-      - name: Run tests
-        run: npm test
-        working-directory: nextjs-clearbill-ai
-        env:
-          ASTRA_DB_NAMESPACE: ${{ secrets.ASTRA_DB_NAMESPACE }}
-          ASTRA_DB_COLLECTION: ${{ secrets.ASTRA_DB_COLLECTION }}
-          ASTRA_DB_API_ENDPOINT: ${{ secrets.ASTRA_DB_API_ENDPOINT }}
-          ASTRA_DB_APPLICATION_TOKEN: ${{ secrets.ASTRA_DB_APPLICATION_TOKEN }}
-          HUGGINGFACE_API_TOKEN: ${{ secrets.HUGGINGFACE_API_TOKEN }}

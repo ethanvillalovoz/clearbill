@@ -1,5 +1,5 @@
 ---
-name: "🐛 Bug Report"
+name: "Bug Report"
 about: Report a bug to help us improve
 labels: bug
 ---
@@ -22,8 +22,12 @@ If applicable, add screenshots to help explain your problem.
 
 **Environment (please complete the following information):**
 - OS: [e.g. macOS, Windows, Linux]
-- Browser [e.g. Chrome, Safari]
-- Python version [e.g. 3.10]
+- Browser: [e.g. Chrome, Safari]
+- Node.js version: [e.g. 20.11.0]
+- npm version: [e.g. 10.2.4]
 
 **Additional context**
 Add any other context about the problem here.
+
+**Data safety**
+Please redact secrets, API tokens, real medical bills, and protected health information before attaching logs or screenshots.
