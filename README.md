@@ -12,6 +12,12 @@ ClearBill.AI is a medical bill explainer built with Next.js, Astra DB vector sea
 ![ClearBill.AI homepage](docs/Homepage.png)
 ![ClearBill.AI example response](docs/example.png)
 
+## Demo Availability
+
+ClearBill.AI is not currently published as a public live app because it depends on a configured Astra DB vector collection, Hugging Face API access, local embedding generation, and carefully handled healthcare billing inputs. The README screenshots are the public demo surface for now.
+
+See [Demo strategy](docs/demo-strategy.md) for the recommended walkthrough format and the requirements for adding a maintained hosted demo later.
+
 ## What It Does
 
 - Answers user questions through a chat interface focused on medical bills and insurance terminology.
