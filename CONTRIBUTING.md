@@ -15,19 +15,17 @@
 git clone https://github.com/ethanvillalovoz/clearbill-ai.git
 cd clearbill-ai/nextjs-clearbill-ai
 npm ci
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-Fill in `.env` with your Astra DB and Hugging Face credentials.
+The default demo does not need credentials. Set `NEXT_PUBLIC_CLEARBILL_MODE=live` and fill in `.env.local` only when testing live retrieval.
 
 ## Development Checks
 
 Run these commands before opening a pull request:
 
 ```sh
-npm run lint
-npm run typecheck
-npm run build
+npm run check
 ```
 
 Use `npm run seed` only when you intentionally want to scrape configured source URLs and write embeddings into Astra DB.
@@ -55,7 +53,7 @@ For feature requests, include:
 - Update documentation when setup, behavior, or environment variables change.
 - Include screenshots for visible UI changes.
 - Reference related issues with `closes #123` when applicable.
-- Confirm that lint, typecheck, and build pass locally.
+- Confirm that `npm run check` passes locally.
 
 ## Code Style
 

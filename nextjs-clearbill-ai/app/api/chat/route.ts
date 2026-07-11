@@ -1,186 +1,163 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@huggingface/transformers";
+import {
+  buildSystemPrompt,
+  dedupeSources,
+  getLatestUserMessage,
+  parseMessages,
+  publisherFromUrl,
+} from "../../lib/chat";
+import type { SourceReference } from "../../types";
 
-const CHAT_MODEL = "meta-llama/Llama-3.1-8B-Instruct:nebius";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const CHAT_MODEL = process.env.HUGGINGFACE_CHAT_MODEL
+  || "meta-llama/Llama-3.1-8B-Instruct:nebius";
 const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";
 const REQUIRED_ENV_KEYS = [
-    "ASTRA_DB_NAMESPACE",
-    "ASTRA_DB_COLLECTION",
-    "ASTRA_DB_API_ENDPOINT",
-    "ASTRA_DB_APPLICATION_TOKEN",
-    "HUGGINGFACE_API_TOKEN",
+  "ASTRA_DB_NAMESPACE",
+  "ASTRA_DB_COLLECTION",
+  "ASTRA_DB_API_ENDPOINT",
+  "ASTRA_DB_APPLICATION_TOKEN",
+  "HUGGINGFACE_API_TOKEN",
 ] as const;
 
 type RequiredEnv = Record<(typeof REQUIRED_ENV_KEYS)[number], string>;
-type HuggingFaceChatMessage = {
-    role: "system" | "user" | "assistant";
-    content: string;
-};
-
-type HuggingFaceChatRequest = {
-    model: string;
-    messages: HuggingFaceChatMessage[];
-    stream: false;
-};
-
 type HuggingFaceChatResponse = {
-    choices?: Array<{
-        message?: {
-            content?: string;
-        };
-    }>;
+  choices?: Array<{ message?: { content?: string } }>;
 };
-
 type FeatureExtractionPipeline = (
-    input: string,
-    options: { pooling: "mean"; normalize: boolean }
+  input: string,
+  options: { pooling: "mean"; normalize: boolean },
 ) => Promise<{ data: Iterable<number> }>;
+type RetrievedDocument = {
+  text?: unknown;
+  source?: unknown;
+  title?: unknown;
+  publisher?: unknown;
+};
 
 let embedderPromise: ReturnType<typeof pipeline> | null = null;
 
 function getRequiredEnv(): RequiredEnv {
-    const values = {} as RequiredEnv;
-
-    for (const key of REQUIRED_ENV_KEYS) {
-        const value = process.env[key];
-        if (!value) {
-            throw new Error(`Missing required environment variable: ${key}`);
-        }
-        values[key] = value;
-    }
-
-    return values;
-}
-
-function getAstraDb(env: RequiredEnv) {
-    const client = new DataAPIClient(env.ASTRA_DB_APPLICATION_TOKEN);
-    return client.db(env.ASTRA_DB_API_ENDPOINT, {
-        keyspace: env.ASTRA_DB_NAMESPACE,
-    });
+  const values = {} as RequiredEnv;
+  for (const key of REQUIRED_ENV_KEYS) {
+    const value = process.env[key];
+    if (!value) throw new Error(`Missing environment variable: ${key}`);
+    values[key] = value;
+  }
+  return values;
 }
 
 function getEmbedder() {
-    embedderPromise ??= pipeline("feature-extraction", EMBEDDING_MODEL);
-    return embedderPromise;
+  embedderPromise ??= pipeline("feature-extraction", EMBEDDING_MODEL);
+  return embedderPromise;
 }
 
-function getLatestMessage(messages: unknown): string {
-    if (!Array.isArray(messages)) {
-        return "";
-    }
+async function callModel(
+  question: string,
+  context: string,
+  token: string,
+): Promise<string> {
+  const response = await fetch("https://router.huggingface.co/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: CHAT_MODEL,
+      messages: [
+        { role: "system", content: buildSystemPrompt(context) },
+        { role: "user", content: question },
+      ],
+      max_tokens: 420,
+      temperature: 0.2,
+      stream: false,
+    }),
+    signal: AbortSignal.timeout(25_000),
+  });
 
-    const latestMessage = messages.at(-1);
-    if (
-        typeof latestMessage === "object" &&
-        latestMessage !== null &&
-        "content" in latestMessage &&
-        typeof latestMessage.content === "string"
-    ) {
-        return latestMessage.content;
-    }
+  if (!response.ok) {
+    throw new Error(`Hugging Face request failed with status ${response.status}`);
+  }
 
-    return "";
+  const result = (await response.json()) as HuggingFaceChatResponse;
+  const content = result.choices?.[0]?.message?.content?.trim();
+  if (!content) throw new Error("Hugging Face returned an empty response");
+  return content;
 }
 
-async function callLlama(data: HuggingFaceChatRequest, token: string) {
-    const response = await fetch(
-        "https://router.huggingface.co/v1/chat/completions",
-        {
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify(data),
-        }
+export async function POST(request: Request) {
+  try {
+    const body = (await request.json()) as { messages?: unknown };
+    const messages = parseMessages(body.messages);
+    const question = getLatestUserMessage(messages);
+    if (!question) {
+      return Response.json({ error: "A user question is required." }, { status: 400 });
+    }
+
+    const env = getRequiredEnv();
+    const embedder = (await getEmbedder()) as unknown as FeatureExtractionPipeline;
+    const output = await embedder(question, { pooling: "mean", normalize: true });
+    const embedding = Array.from(output.data);
+
+    const client = new DataAPIClient(env.ASTRA_DB_APPLICATION_TOKEN);
+    const db = client.db(env.ASTRA_DB_API_ENDPOINT, { keyspace: env.ASTRA_DB_NAMESPACE });
+    const collection = await db.collection(env.ASTRA_DB_COLLECTION);
+    const documents = await collection.find(null, {
+      sort: { $vector: embedding },
+      limit: 6,
+    }).toArray() as RetrievedDocument[];
+
+    const usableDocuments = documents.filter(
+      (document) => typeof document.text === "string" && document.text.trim(),
     );
-    if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Hugging Face API error: ${response.status} ${response.statusText} - ${text}`);
+    if (!usableDocuments.length) {
+      return Response.json(
+        { error: "No billing guidance matched that question. Try a more specific term." },
+        { status: 422 },
+      );
     }
 
-    const result = (await response.json()) as HuggingFaceChatResponse;
-    return result.choices?.[0]?.message?.content || "Sorry, I couldn't generate a response.";
-}
+    const context = usableDocuments
+      .map((document, index) => `[${index + 1}] ${String(document.text)}`)
+      .join("\n\n");
+    const sources = dedupeSources(
+      usableDocuments.flatMap((document): SourceReference[] => {
+        if (typeof document.source !== "string") return [];
+        return [{
+          title: typeof document.title === "string"
+            ? document.title
+            : "Healthcare billing guidance",
+          publisher: typeof document.publisher === "string"
+            ? document.publisher
+            : publisherFromUrl(document.source),
+          url: document.source,
+        }];
+      }),
+    ).slice(0, 4);
 
-export async function POST(req: Request) {
-    try {
-        const env = getRequiredEnv();
-        const db = getAstraDb(env);
-        const body = (await req.json()) as { messages?: unknown };
-        const latestMessage = getLatestMessage(body.messages);
-
-        let docContext = "";
-
-        const embedder = (await getEmbedder()) as unknown as FeatureExtractionPipeline;
-        const output = await embedder(latestMessage, { pooling: "mean", normalize: true });
-        const embedding = Array.from(output.data);
-
-        try {
-            const collection = await db.collection(env.ASTRA_DB_COLLECTION);
-            const cursor = collection.find(null, {
-                sort: { $vector: embedding },
-                limit: 10,
-            });
-            const documents = await cursor.toArray();
-            const docsMap = documents?.map((doc) => doc.text);
-            docContext = JSON.stringify(docsMap);
-        } catch (error) {
-            console.log("Error querying Astra DB:", error);
-            docContext = "";
-        }
-
-        const chatData: HuggingFaceChatRequest = {
-            model: CHAT_MODEL,
-            messages: [
-                {
-                    role: "system",
-                    content: `You are a helpful assistant that provides clear and concise answers to questions about medical bills, insurance, and healthcare costs.
-
-                    Use the following context to inform your responses:
-                    --------------------
-                    START CONTEXT
-                    ${docContext}
-                    END CONTEXT
-                    --------------------
-
-                    If the context does not contain the answer, respond based on your existing knowledge, but do not reference the source or mention what is or isn't included in the context.
-
-                    Keep responses accurate, concise, and formatted in plain text. Do not generate images or unnecessary formatting.`
-                },
-                {
-                    role: "user",
-                    content: latestMessage,
-                },
-            ],
-            stream: false,
-        };
-
-        const answer = await callLlama(chatData, env.HUGGINGFACE_API_TOKEN);
-
-        const formattedAnswer = answer
-            .replace(/(\d+\.)/g, "\n$1")
-            .replace(/•/g, "\n•");
-
-        return Response.json({
-            id: "chatcmpl-xxx",
-            object: "chat.completion",
-            created: Date.now(),
-            model: CHAT_MODEL,
-            choices: [
-                {
-                    index: 0,
-                    finish_reason: "stop",
-                    message: {
-                        role: "assistant",
-                        content: formattedAnswer,
-                    },
-                },
-            ],
-        });
-
-    } catch (error) {
-        console.error("API /api/chat error:", error);
-        return new Response("Error: " + error, { status: 500 });
+    const answer = await callModel(question, context, env.HUGGINGFACE_API_TOKEN);
+    return Response.json({ answer, sources, mode: "live" });
+  } catch (error) {
+    if (error instanceof SyntaxError) {
+      return Response.json({ error: "Request body must be valid JSON." }, { status: 400 });
     }
+    if (
+      error instanceof Error
+      && (error.message.startsWith("messages") || error.message.startsWith("each message"))
+    ) {
+      return Response.json({ error: error.message }, { status: 400 });
+    }
+
+    console.error("ClearBill chat request failed", error);
+    const unconfigured = error instanceof Error
+      && error.message.startsWith("Missing environment variable");
+    return Response.json(
+      { error: unconfigured ? "Live retrieval is not configured." : "Answer generation is temporarily unavailable." },
+      { status: unconfigured ? 503 : 502 },
+    );
+  }
 }

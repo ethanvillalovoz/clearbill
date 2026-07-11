@@ -1,7 +1,7 @@
 import { DataAPIClient } from "@datastax/astra-db-ts";
 import { pipeline } from "@huggingface/transformers";
 import "dotenv/config";
-import puppeteer from "puppeteer";
+import puppeteer, { type Page } from "puppeteer";
 
 const EMBEDDING_MODEL = "Xenova/all-MiniLM-L6-v2";
 const VECTOR_DIMENSION = 384;
@@ -75,16 +75,12 @@ function splitText(text: string, chunkSize = CHUNK_SIZE, chunkOverlap = CHUNK_OV
     return chunks;
 }
 
-async function scrapePage(url: string): Promise<string> {
-    const browser = await puppeteer.launch({ headless: true });
-
-    try {
-        const page = await browser.newPage();
-        await page.goto(url, { waitUntil: "domcontentloaded" });
-        return await page.evaluate(() => document.body?.innerText ?? "");
-    } finally {
-        await browser.close();
-    }
+async function scrapePage(page: Page, url: string) {
+    await page.goto(url, { waitUntil: "domcontentloaded", timeout: 30_000 });
+    return page.evaluate(() => ({
+        text: document.body?.innerText ?? "",
+        title: document.title,
+    }));
 }
 
 async function main() {
@@ -115,28 +111,36 @@ async function main() {
 
     async function loadSourceData() {
         const collection = await db.collection(env.ASTRA_DB_COLLECTION);
+        const browser = await puppeteer.launch({ headless: true });
+        const page = await browser.newPage();
 
-        for (const url of clearbillData) {
-            console.log(`Scraping: ${url}`);
-            const content = await scrapePage(url);
+        try {
+            for (const url of clearbillData) {
+                console.log(`Scraping: ${url}`);
+                const { text, title } = await scrapePage(page, url);
 
-            if (!content) {
-                console.warn(`No content scraped from: ${url}`);
-                continue;
+                if (!text) {
+                    console.warn(`No content scraped from: ${url}`);
+                    continue;
+                }
+
+                for (const chunk of splitText(text)) {
+                    const output = await embedder(chunk, { pooling: "mean", normalize: true });
+                    const vector = Array.from(output.data);
+
+                    const result = await collection.insertOne({
+                        $vector: vector,
+                        text: chunk,
+                        source: url,
+                        title,
+                        publisher: new URL(url).hostname.replace(/^www\./, ""),
+                    });
+
+                    console.log("Inserted chunk:", result.insertedId);
+                }
             }
-
-            for (const chunk of splitText(content)) {
-                const output = await embedder(chunk, { pooling: "mean", normalize: true });
-                const vector = Array.from(output.data);
-
-                const result = await collection.insertOne({
-                    $vector: vector,
-                    text: chunk,
-                    source: url,
-                });
-
-                console.log("Inserted chunk:", result.insertedId);
-            }
+        } finally {
+            await browser.close();
         }
     }
 

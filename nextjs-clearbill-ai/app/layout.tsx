@@ -1,10 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./global.css";
 
 export const metadata: Metadata = {
-    title: "ClearBill.AI",
-    description: "AI assistant for explaining medical bills, insurance terms, and healthcare charges.",
+    title: "ClearBill | Healthcare Cost Explainer",
+    description: "Source-backed educational explanations for medical bills, insurance terms, and healthcare charges.",
+    robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+    colorScheme: "light",
+    themeColor: "#f7f8f6",
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

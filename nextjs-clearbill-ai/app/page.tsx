@@ -1,112 +1,182 @@
 "use client";
 
-import { type ChangeEvent, type FormEvent, useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import clearbill_ai_logo from "./assets/clearbill_ai_logo.png";
+import {
+  type FormEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import Link from "next/link";
 import Bubble from "./components/Bubble";
 import LoadingBubble from "./components/LoadingBubble";
 import PromptSuggestionsRow from "./components/PromptSuggestionsRow";
-import type { ChatMessage } from "./types";
+import SourcePanel from "./components/SourcePanel";
+import { DEMO_SOURCES, getDemoResponse } from "./data/demo";
+import type { ChatMessage, ChatResponse, SourceReference } from "./types";
+
+const mode = process.env.NEXT_PUBLIC_CLEARBILL_MODE === "live" ? "live" : "demo";
 
 const Home = () => {
-    const [input, setInput] = useState("");
-    const [messages, setMessages] = useState<ChatMessage[]>([]);
-    const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [sources, setSources] = useState<SourceReference[]>(
+    mode === "demo" ? DEMO_SOURCES : [],
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, isLoading]);
 
-    const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  const requestAnswer = async (nextMessages: ChatMessage[]): Promise<ChatResponse> => {
+    if (mode === "demo") {
+      await new Promise((resolve) => setTimeout(resolve, 650));
+      return getDemoResponse(nextMessages.at(-1)?.content ?? "");
+    }
+
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: nextMessages }),
+      signal: AbortSignal.timeout(30_000),
+    });
+    const data = (await response.json().catch(() => ({}))) as Partial<ChatResponse> & {
+      error?: string;
     };
 
-    useEffect(() => {
-        scrollToBottom();
-    }, [messages, isLoading]);
+    if (!response.ok || !data.answer) {
+      throw new Error(data.error || "ClearBill could not complete that request.");
+    }
 
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setInput(event.target.value);
+    return {
+      answer: data.answer,
+      mode: "live",
+      sources: data.sources ?? [],
     };
+  };
 
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (!input.trim()) return;
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const question = input.trim();
+    if (!question || isLoading) return;
 
-        const userMessage: ChatMessage = { role: "user", content: input };
-        setMessages((prev) => [...prev, userMessage]);
-        setIsLoading(true);
+    const userMessage: ChatMessage = { role: "user", content: question };
+    const nextMessages = [...messages, userMessage];
+    setMessages(nextMessages);
+    setInput("");
+    setError("");
+    setIsLoading(true);
 
-        const response = await fetch("/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ messages: [...messages, userMessage] }),
-        });
+    try {
+      const result = await requestAnswer(nextMessages);
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: result.answer, sources: result.sources },
+      ]);
+      setSources(result.sources);
+    } catch (requestError) {
+      const message = requestError instanceof Error
+        ? requestError.message
+        : "ClearBill could not complete that request.";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-        const data = await response.json();
-        const assistantMessage: ChatMessage = {
-            role: "assistant",
-            content: data.choices?.[0]?.message?.content || "",
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
-        setInput("");
-        setIsLoading(false);
-    };
+  const handlePrompt = (prompt: string) => {
+    setInput(prompt);
+    inputRef.current?.focus();
+  };
 
-    const handlePrompt = (promptText: string) => {
-        setInput(promptText);
-    };
+  const noMessages = messages.length === 0;
 
-    const noMessages = messages.length === 0;
+  return (
+    <div className="app-shell">
+      <header className="topbar">
+        <Link className="brand" href="/" aria-label="ClearBill home">
+          <span className="brand-mark" aria-hidden="true">CB</span>
+          <span>
+            <strong>ClearBill</strong>
+            <small>Healthcare cost explainer</small>
+          </span>
+        </Link>
+        <div className="topbar-meta">
+          <span className="status-dot" aria-hidden="true" />
+          <span>{mode === "demo" ? "Demo corpus" : "Live retrieval"}</span>
+          <a href="https://github.com/ethanvillalovoz/clearbill-ai" target="_blank" rel="noreferrer">
+            Repository
+          </a>
+        </div>
+      </header>
 
-    return (
-        <main>
-            <div className="header">
-                <Image
-                    src={clearbill_ai_logo}
-                    alt="ClearBill AI Logo"
-                    width={250}
-                />
+      <main className="workspace">
+        <section className="conversation" aria-label="Billing conversation">
+          <div className="conversation-scroll">
+            {noMessages ? (
+              <div className="welcome-state">
+                <p className="eyebrow">01 / Billing workspace</p>
+                <h1>Understand the line item before you act.</h1>
+                <p className="welcome-copy">
+                  Ask about an Explanation of Benefits, insurance adjustment, billing code,
+                  or patient-responsibility amount. ClearBill responds with source-backed
+                  educational guidance.
+                </p>
+                <PromptSuggestionsRow onPromptClick={handlePrompt} />
+              </div>
+            ) : (
+              <div className="message-list" aria-live="polite">
+                {messages.map((message, index) => (
+                  <Bubble key={`${message.role}-${index}`} message={message} />
+                ))}
+                {isLoading ? <LoadingBubble /> : null}
+                <div ref={messagesEndRef} />
+              </div>
+            )}
+          </div>
+
+          <form className="composer" onSubmit={handleSubmit}>
+            <label htmlFor="billing-question">Ask a billing question</label>
+            <div className="composer-row">
+              <textarea
+                ref={inputRef}
+                id="billing-question"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                placeholder="Example: Why is the allowed amount lower than the amount billed?"
+                maxLength={2_000}
+                rows={2}
+                disabled={isLoading}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && !event.shiftKey) {
+                    event.preventDefault();
+                    event.currentTarget.form?.requestSubmit();
+                  }
+                }}
+              />
+              <button type="submit" disabled={isLoading || !input.trim()}>
+                {isLoading ? "Reviewing" : "Ask"}
+              </button>
             </div>
+            <div className="composer-meta">
+              <span>{input.length} / 2,000</span>
+            </div>
+            {error ? <p className="error-message" role="alert">{error}</p> : null}
+          </form>
+        </section>
 
-            <section className={noMessages ? "" : "populated"}>
-                {noMessages ? (
-                    <>
-                        <p className="starter-text">
-                            Welcome to ClearBill.AI! Your personal assistant for understanding and managing medical bills.<br />
-                            Ask any question about your healthcare charges, insurance, or billing—I&apos;m here to help you make sense of it all.
-                        </p>
-                        <br />
-                        <PromptSuggestionsRow onPromptClick={handlePrompt} />
-                    </>
-                ) : (
-                    <div className="messages-wrapper">
-                        {messages.map((message, index) => (
-                            <Bubble
-                                key={`message-${index}`}
-                                message={message}
-                            />
-                        ))}
-                        {isLoading && <LoadingBubble />}
-                        <div ref={messagesEndRef} />
-                    </div>
-                )}
-            </section>
+        <SourcePanel mode={mode} sources={sources} />
+      </main>
 
-            <form onSubmit={handleSubmit}>
-                <input
-                    className="question-box"
-                    onChange={handleInputChange}
-                    value={input}
-                    placeholder="Type your question here..."
-                    disabled={isLoading}
-                />
-                <input
-                    type="submit"
-                    value="Send"
-                    disabled={isLoading}
-                />
-            </form>
-        </main>
-    );
+      <footer className="privacy-note">
+        <strong>Do not enter protected health information.</strong>
+        <span>ClearBill is educational and does not determine coverage, diagnose conditions, or replace professional advice.</span>
+      </footer>
+    </div>
+  );
 };
 
 export default Home;
