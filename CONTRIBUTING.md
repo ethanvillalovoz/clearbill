@@ -12,7 +12,7 @@
 ## Local Setup
 
 ```sh
-git clone https://github.com/ethanvillalovoz/clearbill-ai.git
+git clone https://github.com/ethanvillalovoz/clearbill.git
 cd clearbill-ai/nextjs-clearbill-ai
 npm ci
 cp .env.example .env.local

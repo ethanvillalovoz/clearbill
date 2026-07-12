@@ -107,7 +107,7 @@ const Home = () => {
         <div className="topbar-meta">
           <span className="status-dot" aria-hidden="true" />
           <span>{mode === "demo" ? "Demo corpus" : "Live retrieval"}</span>
-          <a href="https://github.com/ethanvillalovoz/clearbill-ai" target="_blank" rel="noreferrer">
+          <a href="https://github.com/ethanvillalovoz/clearbill" target="_blank" rel="noreferrer">
             Repository
           </a>
         </div>

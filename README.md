@@ -2,7 +2,7 @@
 
 A source-backed healthcare cost explainer for understanding medical bills, insurance adjustments, and patient-responsibility amounts.
 
-[![CI](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml)
+[![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
 ![ClearBill moving from a billing question to a source-backed educational answer](docs/media/clearbill-demo.gif)
