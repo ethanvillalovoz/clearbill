@@ -9,13 +9,11 @@ For the full project overview, setup guide, architecture notes, and contribution
 ```sh
 npm ci
 npm run dev
-npm run lint
-npm run typecheck
-npm run build
+npm run check
 ```
 
 ## Environment
 
-Copy `.env.example` to `.env` and fill in the Astra DB and Hugging Face values before running the app or seed script.
+Copy `.env.example` to `.env.local`. Demo mode works without credentials. Live mode and the seed script require the Astra DB and Hugging Face values.
 
 Run `npm run browsers:install` before the first `npm run seed` call so Puppeteer has a local browser binary for scraping.

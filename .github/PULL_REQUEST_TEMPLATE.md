@@ -20,9 +20,7 @@ Fixes #(issue)
 - [ ] I have made corresponding changes to the documentation (if relevant)
 - [ ] My changes generate no new warnings
 - [ ] I have not committed secrets, `.env` files, real medical bills, or protected health information
-- [ ] `npm run lint` passes from `nextjs-clearbill-ai`
-- [ ] `npm run typecheck` passes from `nextjs-clearbill-ai`
-- [ ] `npm run build` passes from `nextjs-clearbill-ai`
+- [ ] `npm run check` passes from `nextjs-clearbill-ai`
 
 ## Additional context
 

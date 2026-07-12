@@ -1,171 +1,123 @@
-# ClearBill.AI
+# ClearBill
 
-[![CI](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill-ai/actions/workflows/ci.yml)
-![License](https://img.shields.io/github/license/ethanvillalovoz/clearbill-ai)
+A source-backed healthcare cost explainer for understanding medical bills, insurance adjustments, and patient-responsibility amounts.
 
-ClearBill.AI is a medical bill explainer built with Next.js, Astra DB vector search, local embeddings, and a Hugging Face-hosted Llama model. It uses retrieval-augmented generation to answer questions about billing language, insurance terms, healthcare charges, and common patient billing workflows.
+[![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
-> ClearBill.AI is an educational project, not medical, legal, insurance, or financial advice. Do not upload real patient health information or sensitive billing records unless you have reviewed the deployment, data handling, and compliance requirements for your use case.
+![ClearBill moving from a billing question to a source-backed educational answer](docs/media/clearbill-demo.gif)
 
-## Screenshots
+> ClearBill is an educational project, not medical, legal, insurance, or financial advice. Do not enter protected health information, member IDs, account numbers, diagnoses, or real billing records.
 
-![ClearBill.AI homepage](docs/Homepage.png)
-![ClearBill.AI example response](docs/example.png)
+## Product
 
-## Demo Availability
+ClearBill separates the answer from its grounding. The conversation explains a term or next verification step; the adjacent source panel shows the public guidance used and keeps the tool's boundaries visible.
 
-ClearBill.AI is not currently published as a public live app because it depends on a configured Astra DB vector collection, Hugging Face API access, local embedding generation, and carefully handled healthcare billing inputs. The README screenshots are the public demo surface for now.
-
-See [Demo strategy](docs/demo-strategy.md) for the recommended walkthrough format and the requirements for adding a maintained hosted demo later.
-
-## What It Does
-
-- Answers user questions through a chat interface focused on medical bills and insurance terminology.
-- Retrieves relevant healthcare billing context from an Astra DB vector collection.
-- Generates local query embeddings with `@huggingface/transformers`.
-- Calls the Hugging Face chat completions router with `meta-llama/Llama-3.1-8B-Instruct:nebius`.
-- Renders assistant responses with Markdown support for clearer explanations.
-
-## Tech Stack
-
-- **Framework:** Next.js, React, TypeScript
-- **Retrieval:** Astra DB vector search
-- **Embeddings:** `@huggingface/transformers`
-- **LLM:** Hugging Face chat completions router
-- **Data ingestion:** Puppeteer, local text chunking
-- **UI rendering:** `react-markdown`
+The default build is a deterministic demo that works without credentials. Live mode embeds a bounded question, retrieves matching passages from Astra DB, and asks a hosted Llama model to answer strictly from that context. If retrieval returns no usable evidence, the API declines to generate an answer.
 
 ## Architecture
 
-```text
-Healthcare source URLs
-        |
-        v
-scripts/loadDB.ts
-        |
-        v
-Puppeteer scrape -> local text chunks -> local embeddings -> Astra DB vector collection
-        |
-        v
-User question -> local query embedding -> vector search -> retrieved context
-        |
-        v
-Hugging Face chat completion -> Markdown response -> Next.js chat UI
+```mermaid
+flowchart LR
+    Q[Billing question] --> E[Local MiniLM embedding]
+    E --> V[Astra DB vector search]
+    V --> C[Bounded source context]
+    C --> L[Hosted Llama model]
+    L --> A[Answer + source references]
+    S[Curated public guidance] --> P[Puppeteer ingestion]
+    P --> V
 ```
 
-## Repository Layout
+| Layer | Responsibility |
+| --- | --- |
+| Next.js + React | Billing workspace, deterministic demo, source inspection, and safe error states |
+| Route handler | Payload validation, retrieval orchestration, context-only prompt, and bounded timeout |
+| Astra DB | Vector search over curated public healthcare billing guidance |
+| Transformers.js | Local `all-MiniLM-L6-v2` query and corpus embeddings |
+| Hugging Face router | Low-temperature answer generation from retrieved context only |
 
-```text
-.
-├── docs/                    # Screenshots and project documentation
-├── nextjs-clearbill-ai/      # Next.js application
-│   ├── app/                  # App Router pages, components, and API route
-│   ├── scripts/loadDB.ts     # Data loading script for Astra DB
-│   └── .env.example          # Required environment variables
-├── .github/                  # CI, issue templates, and PR template
-├── CONTRIBUTING.md
-├── LICENSE
-└── README.md
+## Run The Demo
+
+```bash
+cd nextjs-clearbill-ai
+npm ci
+npm run dev
 ```
 
-## Prerequisites
+Open [http://localhost:3000](http://localhost:3000). The interface labels the demo corpus and never represents fixture answers as live retrieval.
 
-- Node.js 20+
-- npm
-- Astra DB serverless vector database
-- Hugging Face account and API token
+## Run Live Retrieval
 
-## Quick Start
+1. Copy the environment template.
 
-1. Clone the repository.
-
-   ```sh
-   git clone https://github.com/ethanvillalovoz/clearbill-ai.git
-   cd clearbill-ai/nextjs-clearbill-ai
+   ```bash
+   cp .env.example .env.local
    ```
 
-2. Install dependencies.
+2. Set `NEXT_PUBLIC_CLEARBILL_MODE=live` and configure Astra DB plus a Hugging Face token.
 
-   ```sh
-   npm ci
-   ```
+3. Install the Puppeteer browser and seed the vector collection.
 
-3. Create your local environment file.
-
-   ```sh
-   cp .env.example .env
-   ```
-
-4. Fill in `.env`.
-
-   ```env
-   ASTRA_DB_NAMESPACE=your_astra_db_keyspace
-   ASTRA_DB_COLLECTION=your_astra_db_collection
-   ASTRA_DB_API_ENDPOINT=your_astra_db_api_endpoint
-   ASTRA_DB_APPLICATION_TOKEN=your_astra_db_application_token
-   HUGGINGFACE_API_TOKEN=your_hugging_face_api_token
-   ```
-
-5. Seed Astra DB with source content.
-
-   ```sh
+   ```bash
    npm run browsers:install
    npm run seed
    ```
 
-6. Start the development server.
+4. Start the app with `npm run dev`.
 
-   ```sh
-   npm run dev
-   ```
+The seed process reuses one browser session, stores source title and publisher metadata with every chunk, and closes the browser even when a source fails.
 
-7. Open [http://localhost:3000](http://localhost:3000).
+## Environment
 
-## Astra DB Setup
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_CLEARBILL_MODE` | `demo` by default; set to `live` to call `/api/chat` |
+| `ASTRA_DB_NAMESPACE` | Astra DB keyspace |
+| `ASTRA_DB_COLLECTION` | Vector collection name |
+| `ASTRA_DB_API_ENDPOINT` | Astra DB API endpoint |
+| `ASTRA_DB_APPLICATION_TOKEN` | Server-side Astra DB token |
+| `HUGGINGFACE_API_TOKEN` | Server-side model router token |
+| `HUGGINGFACE_CHAT_MODEL` | Optional hosted chat model override |
 
-1. Create a serverless vector database in [Astra DB](https://astra.datastax.com).
-2. Create or choose a keyspace for ClearBill.AI.
-3. Copy the API endpoint and application token from the Astra DB connection settings.
-4. Set `ASTRA_DB_COLLECTION` to the collection name you want the seed script to create/use.
+Only `NEXT_PUBLIC_CLEARBILL_MODE` is exposed to the browser. All credentials remain server-side.
 
-The seed script creates a vector collection configured for the local embedding model and inserts scraped content chunks with their embeddings.
+## Safety Contract
 
-## Data Loading
+- Requests contain 1-20 messages; each message is limited to 2,000 characters.
+- Only `user` and `assistant` roles are accepted from the client.
+- The model receives up to six retrieved passages and a context-only system prompt.
+- No answer is generated when retrieval produces no usable text.
+- Model calls time out after 25 seconds and upstream response bodies are not exposed publicly.
+- Markdown renders without raw HTML, and external links open with `rel="noreferrer"`.
 
-The loader lives at `nextjs-clearbill-ai/scripts/loadDB.ts`.
+These controls reduce obvious failure modes; they do not make this project HIPAA compliant or suitable for processing real patient data.
 
-To change the source corpus, update the `clearbillData` URL array in that file, then run:
+## Repository Map
 
-```sh
-npm run browsers:install
-npm run seed
+```text
+nextjs-clearbill-ai/app/             product interface and route handler
+nextjs-clearbill-ai/app/lib/         validation, source, and prompt contracts
+nextjs-clearbill-ai/app/data/        deterministic public demo fixtures
+nextjs-clearbill-ai/scripts/loadDB.ts corpus ingestion and embedding pipeline
+docs/media/                           verified desktop and mobile captures
 ```
 
-The browser install step is only needed before the first seed run or when you want Puppeteer to refresh its local browser binary. The loader scrapes each URL, splits the page text into overlapping chunks, embeds each chunk, and inserts the result into Astra DB.
+## Verification
 
-## Scripts
+```bash
+cd nextjs-clearbill-ai
+npm run check
+```
 
-Run these commands from `nextjs-clearbill-ai/`.
+The check runs ESLint, TypeScript, six focused tests, and a production Next.js build. CI executes the same contract on every pull request.
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the local Next.js dev server |
-| `npm run build` | Build the production app |
-| `npm run start` | Start the production build |
-| `npm run browsers:install` | Install the local browser binary used by Puppeteer |
-| `npm run lint` | Run ESLint |
-| `npm run typecheck` | Run TypeScript checks |
-| `npm test` | Alias for `npm run typecheck` |
-| `npm run seed` | Scrape, embed, and load content into Astra DB |
+## Limitations
 
-## Contributing
-
-Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request.
-
-## Security
-
-Please do not commit secrets, tokens, `.env` files, real medical bills, or protected health information. See [SECURITY.md](SECURITY.md) for responsible disclosure guidance.
+- Billing rules and consumer protections vary by plan, jurisdiction, service date, and provider.
+- Public web guidance can change after the vector collection is seeded.
+- Retrieval relevance is not a guarantee that a generated explanation is correct.
+- ClearBill does not parse uploaded bills, determine coverage, or adjudicate disputes.
 
 ## License
 
-This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for details.
+Licensed under the [Apache License 2.0](LICENSE).
