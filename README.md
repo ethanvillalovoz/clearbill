@@ -5,9 +5,9 @@ A source-backed healthcare cost explainer for understanding medical bills, insur
 [![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
-[![ClearBill moving from a synthetic claim line to a source-backed educational answer](docs/media/clearbill-poster.webp)](docs/media/clearbill-demo.mp4)
+https://github.com/user-attachments/assets/ee19a69c-d62a-451d-9bfb-0664c02e63c4
 
-Select the preview to watch one claim-line selection produce a grounded educational answer. The statement and response are visibly labeled as deterministic demo data.
+The recording shows one claim-line selection produce a grounded educational answer. The statement and response are visibly labeled as deterministic demo data. The tracked [MP4](docs/media/clearbill-demo.mp4) and [poster](docs/media/clearbill-poster.webp) preserve the source capture.
 
 > ClearBill is an educational project, not medical, legal, insurance, or financial advice. Do not enter protected health information, member IDs, account numbers, diagnoses, or real billing records.
 
