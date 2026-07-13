@@ -5,7 +5,9 @@ A source-backed healthcare cost explainer for understanding medical bills, insur
 [![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
-![ClearBill moving from a billing question to a source-backed educational answer](docs/media/clearbill-demo.gif)
+[![ClearBill moving from a synthetic claim line to a source-backed educational answer](docs/media/clearbill-poster.webp)](docs/media/clearbill-demo.mp4)
+
+Select the preview to watch one claim-line selection produce a grounded educational answer. The statement and response are visibly labeled as deterministic demo data.
 
 > ClearBill is an educational project, not medical, legal, insurance, or financial advice. Do not enter protected health information, member IDs, account numbers, diagnoses, or real billing records.
 
@@ -99,7 +101,7 @@ nextjs-clearbill-ai/app/             product interface and route handler
 nextjs-clearbill-ai/app/lib/         validation, source, and prompt contracts
 nextjs-clearbill-ai/app/data/        deterministic public demo fixtures
 nextjs-clearbill-ai/scripts/loadDB.ts corpus ingestion and embedding pipeline
-docs/media/                           verified desktop and mobile captures
+docs/media/                           verified interaction capture and poster
 ```
 
 ## Verification

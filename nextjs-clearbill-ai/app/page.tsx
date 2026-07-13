@@ -16,6 +16,36 @@ import type { ChatMessage, ChatResponse, SourceReference } from "./types";
 
 const mode = process.env.NEXT_PUBLIC_CLEARBILL_MODE === "live" ? "live" : "demo";
 
+const claimRows = [
+  {
+    id: "submitted",
+    code: "99214",
+    label: "Office visit, established patient",
+    billed: "$425.00",
+    plan: "$235.00",
+    responsibility: "$40.00",
+    prompt: "How do I check whether this office-visit charge is correct?",
+  },
+  {
+    id: "lab",
+    code: "80053",
+    label: "Comprehensive metabolic panel",
+    billed: "$168.00",
+    plan: "$76.00",
+    responsibility: "$20.00",
+    prompt: "Why is the allowed amount lower than the amount billed?",
+  },
+  {
+    id: "adjustment",
+    code: "ADJ",
+    label: "Network discount and plan payment",
+    billed: "-$282.00",
+    plan: "Applied",
+    responsibility: "$0.00",
+    prompt: "What does the insurance adjustment on an EOB mean?",
+  },
+];
+
 const Home = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -24,6 +54,7 @@ const Home = () => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [selectedLine, setSelectedLine] = useState("lab");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -87,26 +118,26 @@ const Home = () => {
     }
   };
 
-  const handlePrompt = (prompt: string) => {
+  const handlePrompt = (prompt: string, lineId?: string) => {
+    setSelectedLine(lineId ?? "");
     setInput(prompt);
     inputRef.current?.focus();
   };
 
   const noMessages = messages.length === 0;
+  const selectedClaim = claimRows.find((row) => row.id === selectedLine);
 
   return (
     <div className="app-shell">
       <header className="topbar">
         <Link className="brand" href="/" aria-label="ClearBill home">
-          <span className="brand-mark" aria-hidden="true">CB</span>
           <span>
             <strong>ClearBill</strong>
-            <small>Healthcare cost explainer</small>
+            <small>Source-backed billing guide</small>
           </span>
         </Link>
         <div className="topbar-meta">
-          <span className="status-dot" aria-hidden="true" />
-          <span>{mode === "demo" ? "Demo corpus" : "Live retrieval"}</span>
+          <span className="status-pill">{mode === "demo" ? "Synthetic statement" : "Live retrieval"}</span>
           <a href="https://github.com/ethanvillalovoz/clearbill" target="_blank" rel="noreferrer">
             Repository
           </a>
@@ -114,17 +145,72 @@ const Home = () => {
       </header>
 
       <main className="workspace">
-        <section className="conversation" aria-label="Billing conversation">
-          <div className="conversation-scroll">
+        <section className="bill-pane" aria-labelledby="statement-title">
+          <div className="statement-heading">
+            <div>
+              <p>Explanation of Benefits</p>
+              <h1 id="statement-title">Claim 04-2719</h1>
+            </div>
+            <dl>
+              <div><dt>Patient</dt><dd>Sample member</dd></div>
+              <div><dt>Date processed</dt><dd>Apr 18, 2026</dd></div>
+              <div><dt>Status</dt><dd>Finalized</dd></div>
+            </dl>
+          </div>
+
+          <div className="statement-summary" aria-label="Claim summary">
+            <div><span>Provider billed</span><strong>$593.00</strong></div>
+            <div><span>Plan discounts</span><strong>-$282.00</strong></div>
+            <div><span>Plan paid</span><strong>-$251.00</strong></div>
+            <div className="amount-due"><span>You may owe</span><strong>$60.00</strong></div>
+          </div>
+
+          <div className="line-items">
+            <div className="line-items-heading">
+              <div>
+                <span>Service details</span>
+                <small>Select a line to prepare a question</small>
+              </div>
+              <div className="column-labels" aria-hidden="true">
+                <span>Billed</span><span>Allowed</span><span>You owe</span>
+              </div>
+            </div>
+            {claimRows.map((row) => (
+              <button
+                key={row.id}
+                type="button"
+                className={`claim-row${selectedLine === row.id ? " is-selected" : ""}`}
+                aria-pressed={selectedLine === row.id}
+                onClick={() => handlePrompt(row.prompt, row.id)}
+              >
+                <span className="claim-description"><small>{row.code}</small><strong>{row.label}</strong></span>
+                <span>{row.billed}</span>
+                <span>{row.plan}</span>
+                <span>{row.responsibility}</span>
+              </button>
+            ))}
+          </div>
+
+          <div className="statement-note">
+            <span>Not a bill</span>
+            <p>Compare this statement with the provider invoice before paying. Amounts and identities shown here are synthetic.</p>
+          </div>
+        </section>
+
+        <div className="review-rail">
+          <section className="conversation" aria-label="Billing conversation">
+            <div className="conversation-scroll">
             {noMessages ? (
-              <div className="welcome-state">
-                <p className="eyebrow">01 / Billing workspace</p>
-                <h1>Understand the line item before you act.</h1>
-                <p className="welcome-copy">
-                  Ask about an Explanation of Benefits, insurance adjustment, billing code,
-                  or patient-responsibility amount. ClearBill responds with source-backed
-                  educational guidance.
-                </p>
+              <div className="review-intro">
+                <h2>Ask about this statement</h2>
+                <p>Select a service on the left or begin with a common billing question.</p>
+                {selectedClaim ? (
+                  <div className="selected-claim" aria-label="Selected claim line">
+                    <span>Selected line</span>
+                    <strong>{selectedClaim.code} · {selectedClaim.label}</strong>
+                    <small>{selectedClaim.responsibility} patient responsibility</small>
+                  </div>
+                ) : null}
                 <PromptSuggestionsRow onPromptClick={handlePrompt} />
               </div>
             ) : (
@@ -136,39 +222,38 @@ const Home = () => {
                 <div ref={messagesEndRef} />
               </div>
             )}
-          </div>
-
-          <form className="composer" onSubmit={handleSubmit}>
-            <label htmlFor="billing-question">Ask a billing question</label>
-            <div className="composer-row">
-              <textarea
-                ref={inputRef}
-                id="billing-question"
-                value={input}
-                onChange={(event) => setInput(event.target.value)}
-                placeholder="Example: Why is the allowed amount lower than the amount billed?"
-                maxLength={2_000}
-                rows={2}
-                disabled={isLoading}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" && !event.shiftKey) {
-                    event.preventDefault();
-                    event.currentTarget.form?.requestSubmit();
-                  }
-                }}
-              />
-              <button type="submit" disabled={isLoading || !input.trim()}>
-                {isLoading ? "Reviewing" : "Ask"}
-              </button>
             </div>
-            <div className="composer-meta">
-              <span>{input.length} / 2,000</span>
-            </div>
-            {error ? <p className="error-message" role="alert">{error}</p> : null}
-          </form>
-        </section>
 
-        <SourcePanel mode={mode} sources={sources} />
+            <form className="composer" onSubmit={handleSubmit}>
+              <label htmlFor="billing-question">Question for this statement</label>
+              <div className="composer-row">
+                <textarea
+                  ref={inputRef}
+                  id="billing-question"
+                  value={input}
+                  onChange={(event) => setInput(event.target.value)}
+                  placeholder="Ask what changed, what you owe, or what to verify next."
+                  maxLength={2_000}
+                  rows={2}
+                  disabled={isLoading}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" && !event.shiftKey) {
+                      event.preventDefault();
+                      event.currentTarget.form?.requestSubmit();
+                    }
+                  }}
+                />
+                <button type="submit" disabled={isLoading || !input.trim()}>
+                  {isLoading ? "Reviewing" : "Review"}
+                </button>
+              </div>
+              <div className="composer-meta"><span>{input.length} / 2,000</span></div>
+              {error ? <p className="error-message" role="alert">{error}</p> : null}
+            </form>
+          </section>
+
+          <SourcePanel mode={mode} sources={sources} />
+        </div>
       </main>
 
       <footer className="privacy-note">

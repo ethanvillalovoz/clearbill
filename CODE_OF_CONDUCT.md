@@ -2,7 +2,7 @@
 
 ## Our Pledge
 
-We pledge to make participation in ClearBill.AI respectful, constructive, and welcoming for everyone.
+We pledge to make participation in ClearBill respectful, constructive, and welcoming for everyone.
 
 ## Expected Behavior
 
