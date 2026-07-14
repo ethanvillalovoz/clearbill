@@ -5,9 +5,9 @@ A source-backed healthcare cost explainer for understanding medical bills, insur
 [![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
-https://github.com/user-attachments/assets/ee19a69c-d62a-451d-9bfb-0664c02e63c4
+[![ClearBill demo: select a claim line and review a source-backed billing explanation](docs/media/clearbill-demo.gif)](docs/media/clearbill-demo.mp4)
 
-The recording shows one claim-line selection produce a grounded educational answer. The statement and response are visibly labeled as deterministic demo data. The tracked [MP4](docs/media/clearbill-demo.mp4) and [poster](docs/media/clearbill-poster.webp) preserve the source capture.
+Select a claim line, ask why the amount changed, and inspect the public guidance behind the answer. The claim and response are fixtures, clearly marked in the interface. [Watch the MP4](docs/media/clearbill-demo.mp4) or open the [poster frame](docs/media/clearbill-poster.webp).
 
 > ClearBill is an educational project, not medical, legal, insurance, or financial advice. Do not enter protected health information, member IDs, account numbers, diagnoses, or real billing records.
 
@@ -103,6 +103,8 @@ nextjs-clearbill-ai/app/data/        deterministic public demo fixtures
 nextjs-clearbill-ai/scripts/loadDB.ts corpus ingestion and embedding pipeline
 docs/media/                           verified interaction capture and poster
 ```
+
+The application icon is from Lucide; its license is reproduced in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 ## Verification
 
