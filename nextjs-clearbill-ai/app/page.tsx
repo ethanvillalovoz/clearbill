@@ -22,8 +22,9 @@ const claimRows = [
     code: "99214",
     label: "Office visit, established patient",
     billed: "$425.00",
-    plan: "$235.00",
+    allowed: "$235.00",
     responsibility: "$40.00",
+    remark: "Office visit reviewed against the plan's negotiated rate.",
     prompt: "How do I check whether this office-visit charge is correct?",
   },
   {
@@ -31,8 +32,9 @@ const claimRows = [
     code: "80053",
     label: "Comprehensive metabolic panel",
     billed: "$168.00",
-    plan: "$76.00",
+    allowed: "$76.00",
     responsibility: "$20.00",
+    remark: "Lab service priced at the plan's allowed amount.",
     prompt: "Why is the allowed amount lower than the amount billed?",
   },
   {
@@ -40,8 +42,9 @@ const claimRows = [
     code: "ADJ",
     label: "Network discount and plan payment",
     billed: "-$282.00",
-    plan: "Applied",
+    allowed: "Applied",
     responsibility: "$0.00",
+    remark: "Adjustment record; this line is not a separate service charge.",
     prompt: "What does the insurance adjustment on an EOB mean?",
   },
 ];
@@ -150,9 +153,11 @@ const Home = () => {
             <div>
               <p>Explanation of Benefits</p>
               <h1 id="statement-title">Claim 04-2719</h1>
+              <small className="statement-subtitle">Northstar Internal Medicine · Sample PPO plan</small>
             </div>
             <dl>
               <div><dt>Patient</dt><dd>Sample member</dd></div>
+              <div><dt>Date of service</dt><dd>Apr 10, 2026</dd></div>
               <div><dt>Date processed</dt><dd>Apr 18, 2026</dd></div>
               <div><dt>Status</dt><dd>Finalized</dd></div>
             </dl>
@@ -185,7 +190,7 @@ const Home = () => {
               >
                 <span className="claim-description"><small>{row.code}</small><strong>{row.label}</strong></span>
                 <span>{row.billed}</span>
-                <span>{row.plan}</span>
+                <span>{row.allowed}</span>
                 <span>{row.responsibility}</span>
               </button>
             ))}
@@ -206,9 +211,16 @@ const Home = () => {
                 <p>Select a service on the left or begin with a common billing question.</p>
                 {selectedClaim ? (
                   <div className="selected-claim" aria-label="Selected claim line">
-                    <span>Selected line</span>
-                    <strong>{selectedClaim.code} · {selectedClaim.label}</strong>
-                    <small>{selectedClaim.responsibility} patient responsibility</small>
+                    <div className="selected-claim-heading">
+                      <span>Review focus</span>
+                      <strong>{selectedClaim.code} · {selectedClaim.label}</strong>
+                    </div>
+                    <dl className="selected-claim-amounts">
+                      <div><dt>Provider charged</dt><dd>{selectedClaim.billed}</dd></div>
+                      <div><dt>Plan allowed</dt><dd>{selectedClaim.allowed}</dd></div>
+                      <div><dt>Patient balance</dt><dd>{selectedClaim.responsibility}</dd></div>
+                    </dl>
+                    <p>{selectedClaim.remark}</p>
                   </div>
                 ) : null}
                 <PromptSuggestionsRow onPromptClick={handlePrompt} />

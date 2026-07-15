@@ -182,6 +182,14 @@ a {
   line-height: 1.1;
 }
 
+.statement-subtitle {
+  display: block;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .statement-heading dl {
   display: grid;
   min-width: 250px;
@@ -413,15 +421,19 @@ a {
 
 .selected-claim {
   display: grid;
-  gap: 3px;
+  gap: 12px;
   margin-bottom: 17px;
-  padding: 11px 13px;
+  padding: 14px 15px 13px;
   border-left: 3px solid var(--blue);
   background: var(--blue-soft);
 }
 
-.selected-claim span,
-.selected-claim small {
+.selected-claim-heading {
+  display: grid;
+  gap: 4px;
+}
+
+.selected-claim span {
   color: var(--muted);
   font-size: 9px;
 }
@@ -432,8 +444,49 @@ a {
 }
 
 .selected-claim strong {
-  font-size: 11px;
-  font-weight: 650;
+  font-size: 12px;
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.selected-claim-amounts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding-top: 10px;
+  border-top: 1px solid #c8d8fa;
+}
+
+.selected-claim-amounts div {
+  min-width: 0;
+}
+
+.selected-claim-amounts dt,
+.selected-claim-amounts dd {
+  margin: 0;
+}
+
+.selected-claim-amounts dt {
+  color: var(--muted);
+  font-size: 8px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.selected-claim-amounts dd {
+  margin-top: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 680;
+  font-variant-numeric: tabular-nums;
+}
+
+.selected-claim p {
+  margin: 0;
+  color: #4f5f78;
+  font-size: 10px;
+  line-height: 1.45;
 }
 
 .prompt-suggestions {
@@ -801,6 +854,10 @@ a {
 
   .statement-heading dd {
     text-align: left;
+  }
+
+  .selected-claim-amounts {
+    grid-template-columns: 1fr;
   }
 
   .statement-summary {

@@ -1,13 +1,13 @@
 # ClearBill
 
-A source-backed healthcare cost explainer for understanding medical bills, insurance adjustments, and patient-responsibility amounts.
+ClearBill opens on one line item from a synthetic explanation of benefits. It puts the provider charge, plan discount, insurer payment, and patient balance next to the public guidance used to explain them.
 
 [![CI](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml/badge.svg)](https://github.com/ethanvillalovoz/clearbill/actions/workflows/ci.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-111111.svg)](LICENSE)
 
 [![ClearBill demo: select a claim line and review a source-backed billing explanation](docs/media/clearbill-demo.gif)](docs/media/clearbill-demo.mp4)
 
-Select a claim line, ask why the amount changed, and inspect the public guidance behind the answer. The claim and response are fixtures, clearly marked in the interface. [Watch the MP4](docs/media/clearbill-demo.mp4) or open the [poster frame](docs/media/clearbill-poster.webp).
+The recording moves through one synthetic statement. Pick a service, check the arithmetic, and inspect the cited guidance. [Watch the MP4](docs/media/clearbill-demo.mp4) or open the [poster frame](docs/media/clearbill-poster.webp).
 
 > ClearBill is an educational project, not medical, legal, insurance, or financial advice. Do not enter protected health information, member IDs, account numbers, diagnoses, or real billing records.
 
@@ -19,16 +19,9 @@ The default build is a deterministic demo that works without credentials. Live m
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    Q[Billing question] --> E[Local MiniLM embedding]
-    E --> V[Astra DB vector search]
-    V --> C[Bounded source context]
-    C --> L[Hosted Llama model]
-    L --> A[Answer + source references]
-    S[Curated public guidance] --> P[Puppeteer ingestion]
-    P --> V
-```
+[![ClearBill architecture from a billing question and curated guidance to a source-backed answer](docs/media/architecture.svg)](docs/media/architecture.excalidraw)
+
+Open the image for the editable Excalidraw source.
 
 | Layer | Responsibility |
 | --- | --- |
