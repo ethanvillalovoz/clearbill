@@ -1,0 +1,42 @@
+{"kind":"deck","id":"pr/acxt25","name":"Deck"}
+{"kind":"layout","layoutId":"ae7e07dc-ab08-491a-a873-71b6dc9c396b","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"00f31446-6927-4408-b2ca-cf408021319c","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/49b8zu","slide":1,"title":"ClearBill keeps the statement, evidence, and answer boundary visible","textShapes":22}
+{"kind":"textbox","id":"sh/yd4r6tk7","slide":1,"name":"title","text":"ClearBill keeps the statement, evidence, and answer boundary visible","textPreview":"ClearBill keeps the statement, evidence, and answer boundary visible","textChars":68,"textLines":1,"bbox":[42,24,1196,44]}
+{"kind":"textbox","id":"sh/l0va1o3i","slide":1,"name":"subtitle","text":"The demo is deterministic; the live server retrieves bounded context and refuses before generation when no usable passage exists.","textPreview":"The demo is deterministic; the live server retrieves bounded context and refuses before generation when no usable passage exists.","textChars":129,"textLines":1,"bbox":[42,73,1196,26]}
+{"kind":"shape","id":"sh/0zm98j2d","slide":1,"name":"header-rule","bbox":[42,111,1196,0]}
+{"kind":"textbox","id":"sh/n2ds3ylo","slide":1,"name":"demo-label","text":"COMPLETE SYNTHETIC REVIEW","textPreview":"COMPLETE SYNTHETIC REVIEW","textChars":25,"textLines":1,"bbox":[42,130,310,22]}
+{"kind":"shape","id":"sh/m14ratk3","slide":1,"name":"screenshot-frame","bbox":[42,158,762,401]}
+{"kind":"textbox","id":"sh/83m9c329","slide":1,"name":"demo-caption","text":"Default fixture · all amounts synthetic · 3 committed public references · no live retrieval","textPreview":"Default fixture · all amounts synthetic · 3 committed public references · no live retrieval","textChars":91,"textLines":1,"bbox":[42,566,762,22]}
+{"kind":"textbox","id":"sh/36t8rulk","slide":1,"name":"live-label","text":"LIVE EVIDENCE GATE","textPreview":"LIVE EVIDENCE GATE","textChars":18,"textLines":1,"bbox":[844,130,250,22]}
+{"kind":"shape","id":"sh/250ry9kz","slide":1,"name":"arrow-1","bbox":[1032,205,12,22]}
+{"kind":"shape","id":"sh/0fqlk72d","slide":1,"name":"arrow-2","bbox":[1032,274,12,22]}
+{"kind":"shape","id":"sh/l0zmtc3y","slide":1,"name":"arrow-3","bbox":[1032,343,12,22]}
+{"kind":"shape","id":"sh/yd83ixk7","slide":1,"name":"question","bbox":[844,158,392,48]}
+{"kind":"textbox","id":"sh/zeh4r2ls","slide":1,"name":"question-copy","text":"Validate 1–20 messages · ≤2,000 chars each","textPreview":"Validate 1–20 messages · ≤2,000 chars each","textChars":42,"textLines":1,"bbox":[860,171,360,22]}
+{"kind":"shape","id":"sh/83alo729","slide":1,"name":"embedding","bbox":[844,227,392,48]}
+{"kind":"textbox","id":"sh/94jmxc3u","slide":1,"name":"embedding-copy","text":"Embed latest question · normalized 384-D","textPreview":"Embed latest question · normalized 384-D","textChars":40,"textLines":1,"bbox":[860,240,360,22]}
+{"kind":"shape","id":"sh/m183mhkj","slide":1,"name":"retrieval","bbox":[844,296,392,48]}
+{"kind":"textbox","id":"sh/n214vml4","slide":1,"name":"retrieval-copy","text":"Astra vector retrieval · at most 6 passages","textPreview":"Astra vector retrieval · at most 6 passages","textChars":43,"textLines":1,"bbox":[860,309,360,22]}
+{"kind":"shape","id":"sh/o76lcn25","slide":1,"name":"gate","bbox":[844,365,392,58]}
+{"kind":"textbox","id":"sh/p8f2ls3q","slide":1,"name":"gate-title","text":"USABLE SOURCE TEXT?","textPreview":"USABLE SOURCE TEXT?","textChars":19,"textLines":1,"bbox":[860,375,210,18]}
+{"kind":"textbox","id":"sh/5472pove","slide":1,"name":"gate-copy","text":"Branch before model generation","textPreview":"Branch before model generation","textChars":30,"textLines":1,"bbox":[860,396,250,17]}
+{"kind":"shape","id":"sh/43y1gjut","slide":1,"name":"refusal","bbox":[844,442,182,76]}
+{"kind":"textbox","id":"sh/32p0nedo","slide":1,"name":"refusal-head","text":"NO","textPreview":"NO","textChars":2,"textLines":1,"bbox":[860,451,40,18]}
+{"kind":"textbox","id":"sh/i1gje9w3","slide":1,"name":"refusal-copy","text":"422 response\nGeneration skipped","textPreview":"422 response | Generation skipped","textChars":31,"textLines":2,"bbox":[860,474,150,38]}
+{"kind":"shape","id":"sh/d8r2tovq","slide":1,"name":"answer","bbox":[1042,442,194,76]}
+{"kind":"textbox","id":"sh/s7i1kju5","slide":1,"name":"answer-head","text":"YES","textPreview":"YES","textChars":3,"textLines":1,"bbox":[1058,451,50,18]}
+{"kind":"textbox","id":"sh/r69kredk","slide":1,"name":"answer-copy","text":"Context-only model\nAnswer + sources","textPreview":"Context-only model | Answer + sources","textChars":35,"textLines":2,"bbox":[1058,474,164,38]}
+{"kind":"textbox","id":"sh/q5gji9cz","slide":1,"name":"gate-note","text":"The model token and Astra credentials remain server-side.","textPreview":"The model token and Astra credentials remain server-side.","textChars":57,"textLines":1,"bbox":[844,531,392,22]}
+{"kind":"shape","id":"sh/1wr2x8vm","slide":1,"name":"boundary-rule","bbox":[42,608,1196,0]}
+{"kind":"textbox","id":"sh/0vi1o3u1","slide":1,"name":"demo-head","text":"DEMO EVIDENCE","textPreview":"DEMO EVIDENCE","textChars":13,"textLines":1,"bbox":[42,624,190,19]}
+{"kind":"textbox","id":"sh/yhczilcj","slide":1,"name":"demo-copy","text":"Synthetic EOB, fixture answer, and three public references.","textPreview":"Synthetic EOB, fixture answer, and three public references.","textChars":59,"textLines":1,"bbox":[42,648,326,38]}
+{"kind":"shape","id":"sh/zilgbqt4","slide":1,"name":"divider-1","bbox":[392,624,0,57]}
+{"kind":"textbox","id":"sh/k3uhkvap","slide":1,"name":"live-head","text":"LIVE IMPLEMENTATION","textPreview":"LIVE IMPLEMENTATION","textChars":19,"textLines":1,"bbox":[418,624,220,19]}
+{"kind":"textbox","id":"sh/l43yd0ba","slide":1,"name":"live-copy","text":"Bounded retrieval, context-only generation, and explicit refusal.","textPreview":"Bounded retrieval, context-only generation, and explicit refusal.","textChars":65,"textLines":1,"bbox":[418,648,338,38]}
+{"kind":"shape","id":"sh/m5czm5sv","slide":1,"name":"divider-2","bbox":[782,624,0,57]}
+{"kind":"textbox","id":"sh/76lgfatg","slide":1,"name":"not-head","text":"NOT CLAIMED","textPreview":"NOT CLAIMED","textChars":11,"textLines":1,"bbox":[808,624,170,19]}
+{"kind":"textbox","id":"sh/87ehofal","slide":1,"name":"not-copy","text":"No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textPreview":"No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textChars":84,"textLines":1,"bbox":[808,648,400,38]}
+{"kind":"textbox","id":"sh/98nyhkb6","slide":1,"name":"sources","text":"Sources: app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts · scripts/loadDB.ts","textPreview":"Sources: app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts · scripts/loadDB.ts","textChars":87,"textLines":1,"bbox":[42,696,1196,15]}
+{"kind":"image","id":"im/kvudcb2l","slide":1,"name":"","alt":"ClearBill deterministic demo showing a complete synthetic explanation of benefits, an answer, three public sources, and safety boundaries","bbox":[45,161,756,395]}
+{"kind":"notes","id":"nt/49b8zu","slide":1,"text":""}

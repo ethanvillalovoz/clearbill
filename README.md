@@ -19,9 +19,9 @@ The default build is a deterministic demo that works without credentials. Live m
 
 ## Architecture
 
-[![ClearBill architecture from a billing question and curated guidance to a source-backed answer](docs/media/architecture.svg)](docs/media/architecture.excalidraw)
+[![ClearBill evidence path showing a complete synthetic statement review beside bounded live retrieval, explicit refusal, and context-only generation](docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg)](docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf)
 
-Open the image for the editable Excalidraw source.
+The overview separates the credential-free synthetic fixture from behavior maintained in the live route. [Figure contract, editable source, provenance, and preflight records](docs/figures/clearbill-evidence-path/)
 
 | Layer | Responsibility |
 | --- | --- |
@@ -95,6 +95,7 @@ nextjs-clearbill-ai/app/lib/         validation, source, and prompt contracts
 nextjs-clearbill-ai/app/data/        deterministic public demo fixtures
 nextjs-clearbill-ai/scripts/loadDB.ts corpus ingestion and embedding pipeline
 docs/media/                           verified interaction capture and poster
+docs/figures/                         editable evidence figure, exports, and preflight records
 ```
 
 The application icon is from Lucide; its license is reproduced in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
