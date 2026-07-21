@@ -13,4 +13,4 @@ This directory contains the public offline/online architecture overview and its 
 | `media/demo-answer.png` | Archival local demo capture; not an input to the architecture figure |
 | `preflight/` | PowerPoint, final-size, grayscale, and PDF checks |
 
-The diagram traces curated public guidance through extraction, chunking, embedding, Astra retrieval, refusal, and context-only generation. It documents maintained code paths and does not claim billing correctness, retrieval quality, or coverage determination.
+The evidence-plane schematic shows offline corpus construction and online question answering meeting at the same Astra vector collection, then exposes the single retrieval gate that separates refusal from context-only generation. It documents maintained code paths and does not claim billing correctness, retrieval quality, or coverage determination.

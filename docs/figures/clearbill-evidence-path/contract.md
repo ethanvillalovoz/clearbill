@@ -6,11 +6,11 @@ This figure should let a technical reviewer follow ClearBill from an offline pub
 
 ## Figure form
 
-A two-lane system architecture. The offline lane extracts and chunks 18 maintained public URLs, encodes them with MiniLM, and writes source-bearing vectors. The online lane validates the latest question, uses the same embedding space, retrieves at most six usable passages, refuses on empty evidence, or sends a context-only prompt to the hosted model.
+A shared-state evidence-plane schematic. Offline corpus construction enters a dominant central Astra collection from above, while the online question path reaches the same collection from the left. Retrieval leaves the store through one evidence gate whose two orthogonal branches either refuse on empty text or proceed through a grounded prompt and hosted model.
 
 ## Visual encoding
 
-The figure uses a clinical systems palette: blue identifies corpus construction and the successful response, cyan identifies the shared embedding space, amber marks shared retrieval state, violet traces online inference, and coral marks refusal. Every role is also labeled.
+The figure uses a restrained data-system palette: blue marks corpus construction, teal marks the shared embedding/vector representation, indigo marks the online question path, amber marks the evidence gate, green marks grounded generation, and coral marks refusal. Topology and labels remain redundant with color.
 
 ## Supported claim
 

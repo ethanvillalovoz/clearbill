@@ -1,5 +1,5 @@
 {
-  "bytes": 115165,
+  "bytes": 137598,
   "failures": [],
   "file": "/Users/ethanvillalovoz/Documents/Codex/2026-07-15/ok/work/visual-audit/repos/clearbill/docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf",
   "font_report": {
@@ -64,7 +64,7 @@
       {
         "embedded": true,
         "encoding": "WinAnsi",
-        "name": "IAAAAA+Carlito",
+        "name": "IAAAAA+Carlito-Bold",
         "subset": true,
         "type": "TrueType",
         "unicode": true
@@ -97,6 +97,54 @@
         "embedded": true,
         "encoding": "WinAnsi",
         "name": "MAAAAA+Carlito",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "NAAAAA+Carlito-Bold",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "OAAAAA+Carlito-Bold",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "PAAAAA+Carlito",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "QAAAAA+Carlito",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "RAAAAA+Carlito-Bold",
+        "subset": true,
+        "type": "TrueType",
+        "unicode": true
+      },
+      {
+        "embedded": true,
+        "encoding": "WinAnsi",
+        "name": "SAAAAA+Carlito",
         "subset": true,
         "type": "TrueType",
         "unicode": true
