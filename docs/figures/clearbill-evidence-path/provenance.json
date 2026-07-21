@@ -8,16 +8,16 @@
     {"bytes": 340, "path": "nextjs-clearbill-ai/app/types.ts", "role": "response_contract", "sha256": "df8f1a17a6d996edb6b7dcd674d13378908680a9348447061a7e93cb65107990"}
   ],
   "outputs": [
-    {"bytes": 18844, "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx", "role": "editable_pptx", "sha256": "4a803a4e6a063148efa0d13f184834288050d7461dca1b59a95759f5e04e09f2"},
-    {"bytes": 606320, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg", "role": "svg", "sha256": "0c01fcf7db6ce10e7fc62d4e0d227119137db12a2c7bd4af9a19ffd98327e976"},
-    {"bytes": 173868, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png", "role": "png", "sha256": "c93bfb37707716c971a2ee438c4f20a8257e3ea05b5284e8c641b8747d364fad"},
-    {"bytes": 115165, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf", "role": "pdf", "sha256": "a85fdf5dffc10cac9599377436313494603f0815e6b5ba0685715e018c2111bd"}
+    {"bytes": 18430, "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx", "role": "editable_pptx", "sha256": "d2465fef37f55e13bc7306a3910f78e80ffcd373d08af226780f26d28658c67a"},
+    {"bytes": 592087, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg", "role": "svg", "sha256": "62a8660d74b32e1494d3b3496c065ca4039363ffea24e215a8927d181fd9250e"},
+    {"bytes": 172044, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png", "role": "png", "sha256": "9660cb8ce68128dc9afd404f4e5747c066de3606a10fbaa8e2fb0cb5c9b1acfa"},
+    {"bytes": 137598, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf", "role": "pdf", "sha256": "7ab91f2e5579753cfe0b7a4e62f427ae8038d0e885dbaa1e6c2dd1a233dfabc1"}
   ],
   "processing_notes": [
-    "Native editable two-lane RAG architecture with distinct offline, shared-state, online, refusal, and trust roles; exported through LibreOffice; no raster images in the PDF; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
+    "Native editable shared-state evidence-plane schematic with offline and online inputs converging on Astra DB and one explicit refuse-or-generate evidence gate; exported through LibreOffice; no raster images in the PDF; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
   ],
   "schema_version": 1,
-  "source_revision": "cae9642dc817e286c99fada06136f1ec0b5cb0a7",
+  "source_revision": "23bba4e985da8bb97d74c039ff0060b13ea0ca50",
   "selection_note": "Only maintained ingestion, validation, retrieval, refusal, generation, and response branches are represented; no retrieval output or medical conclusion is shown.",
   "target_width_in": 7.16,
   "venue": "GitHub README"
