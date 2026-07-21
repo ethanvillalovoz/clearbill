@@ -1,93 +1,93 @@
-{"kind":"deck","id":"pr/fyxs8r","name":"Deck"}
-{"kind":"layout","layoutId":"c28711dd-6686-4cfa-886b-c4d24e8e15a7","name":"Master","type":"master"}
-{"kind":"layout","layoutId":"b3b816bc-2236-4f36-b86a-c5b5f4343d37","name":"Title Slide","type":"title"}
-{"kind":"slide","id":"sl/yjapkp","slide":1,"title":"ClearBill keeps the explanation attached to the synthetic statement","textShapes":68}
-{"kind":"textbox","id":"sh/xwbmpgne","slide":1,"name":"title","text":"ClearBill keeps the explanation attached to the synthetic statement","textPreview":"ClearBill keeps the explanation attached to the synthetic statement","textChars":67,"textLines":1,"bbox":[42,24,1196,42]}
-{"kind":"textbox","id":"sh/at03el43","slide":1,"name":"subtitle","text":"One EOB is annotated in place: the answer names the fields to compare, cites public guidance, and keeps live refusal separate from the fixture.","textPreview":"One EOB is annotated in place: the answer names the fields to compare, cites public guidance, and keeps live refusal separate from the fi...","textChars":143,"textLines":1,"bbox":[42,71,1196,25]}
-{"kind":"shape","id":"sh/vut4n65o","slide":1,"name":"header-rule","bbox":[42,109,1196,0]}
-{"kind":"textbox","id":"sh/87ilcbmx","slide":1,"name":"document-label","text":"SYNTHETIC EXPLANATION OF BENEFITS","textPreview":"SYNTHETIC EXPLANATION OF BENEFITS","textChars":33,"textLines":1,"bbox":[42,130,340,18]}
-{"kind":"shape","id":"sh/98rmlgni","slide":1,"name":"document","bbox":[42,153,660,431]}
-{"kind":"shape","id":"sh/m503a14r","slide":1,"name":"document-accent","bbox":[42,153,8,431]}
-{"kind":"textbox","id":"sh/n694j65c","slide":1,"name":"doc-eyebrow","text":"EXPLANATION OF BENEFITS","textPreview":"EXPLANATION OF BENEFITS","textChars":23,"textLines":1,"bbox":[66,172,250,16]}
-{"kind":"textbox","id":"sh/s3mlovm1","slide":1,"name":"doc-title","text":"Claim 04-2719","textPreview":"Claim 04-2719","textChars":13,"textLines":1,"bbox":[66,194,260,28]}
-{"kind":"textbox","id":"sh/tovmx0nm","slide":1,"name":"doc-subtitle","text":"Northstar Internal Medicine · Sample PPO plan","textPreview":"Northstar Internal Medicine · Sample PPO plan","textChars":45,"textLines":1,"bbox":[66,224,320,17]}
-{"kind":"textbox","id":"sh/dkjal4je","slide":1,"name":"doc-meta","text":"Sample member\nApr 10, 2026 service\nApr 18, 2026 processed\nFinalized","textPreview":"Sample member | Apr 10, 2026 service | Apr 18, 2026 processed | Finalized","textChars":67,"textLines":4,"bbox":[510,171,164,70]}
-{"kind":"shape","id":"sh/cjatszit","slide":1,"name":"doc-rule-1","bbox":[66,254,608,0]}
-{"kind":"shape","id":"sh/rihsju18","slide":1,"name":"summary-0","bbox":[66,270,142,62]}
-{"kind":"textbox","id":"sh/qh8bqp0n","slide":1,"name":"summary-label-0","text":"PROVIDER BILLED","textPreview":"PROVIDER BILLED","textChars":15,"textLines":1,"bbox":[76,279,122,14]}
-{"kind":"textbox","id":"sh/5gzahkji","slide":1,"name":"summary-value-0","text":"$593.00","textPreview":"$593.00","textChars":7,"textLines":1,"bbox":[76,300,122,23]}
-{"kind":"shape","id":"sh/4fqtofix","slide":1,"name":"summary-1","bbox":[218,270,142,62]}
-{"kind":"textbox","id":"sh/3ehsfa1c","slide":1,"name":"summary-label-1","text":"PLAN DISCOUNTS","textPreview":"PLAN DISCOUNTS","textChars":14,"textLines":1,"bbox":[228,279,122,14]}
-{"kind":"textbox","id":"sh/it8bm50r","slide":1,"name":"summary-value-1","text":"−$282.00","textPreview":"−$282.00","textChars":8,"textLines":1,"bbox":[228,300,122,23]}
-{"kind":"shape","id":"sh/9c3utozm","slide":1,"name":"summary-2","bbox":[370,270,142,62]}
-{"kind":"textbox","id":"sh/obut0ji1","slide":1,"name":"summary-label-2","text":"PLAN PAID","textPreview":"PLAN PAID","textChars":9,"textLines":1,"bbox":[380,279,122,14]}
-{"kind":"textbox","id":"sh/8v2dwnqd","slide":1,"name":"summary-value-2","text":"−$251.00","textPreview":"−$251.00","textChars":8,"textLines":1,"bbox":[380,300,122,23]}
-{"kind":"shape","id":"sh/9gbups7y","slide":1,"name":"summary-3","bbox":[522,270,142,62]}
-{"kind":"textbox","id":"sh/mt0vud87","slide":1,"name":"summary-label-3","text":"YOU MAY OWE","textPreview":"YOU MAY OWE","textChars":11,"textLines":1,"bbox":[532,279,122,14]}
-{"kind":"textbox","id":"sh/7u9cnips","slide":1,"name":"summary-value-3","text":"$60.00","textPreview":"$60.00","textChars":6,"textLines":1,"bbox":[532,300,122,23]}
-{"kind":"textbox","id":"sh/kridsnq1","slide":1,"name":"service-head","text":"SERVICE","textPreview":"SERVICE","textChars":7,"textLines":1,"bbox":[66,350,260,15]}
-{"kind":"textbox","id":"sh/lsrul87m","slide":1,"name":"billed-head","text":"BILLED","textPreview":"BILLED","textChars":6,"textLines":1,"bbox":[420,350,74,15]}
-{"kind":"textbox","id":"sh/yp0vqd8b","slide":1,"name":"allowed-head","text":"ALLOWED","textPreview":"ALLOWED","textChars":7,"textLines":1,"bbox":[505,350,74,15]}
-{"kind":"textbox","id":"sh/zq9cjipg","slide":1,"name":"owe-head","text":"YOU OWE","textPreview":"YOU OWE","textChars":7,"textLines":1,"bbox":[590,350,74,15]}
-{"kind":"shape","id":"sh/cnido3q5","slide":1,"name":"row-bg-0","bbox":[66,373,608,44]}
-{"kind":"textbox","id":"sh/xoruh87q","slide":1,"name":"row-code-0","text":"99214","textPreview":"99214","textChars":5,"textLines":1,"bbox":[78,380,52,13]}
-{"kind":"textbox","id":"sh/fypw7ytc","slide":1,"name":"row-label-0","text":"Office visit, established patient","textPreview":"Office visit, established patient","textChars":33,"textLines":1,"bbox":[78,394,310,17]}
-{"kind":"textbox","id":"sh/exgvytsr","slide":1,"name":"row-billed-0","text":"$425.00","textPreview":"$425.00","textChars":7,"textLines":1,"bbox":[420,388,74,17]}
-{"kind":"textbox","id":"sh/1k7e98bi","slide":1,"name":"row-allowed-0","text":"$235.00","textPreview":"$235.00","textChars":7,"textLines":1,"bbox":[505,388,74,17]}
-{"kind":"textbox","id":"sh/0jyd03ax","slide":1,"name":"row-owe-0","text":"$40.00","textPreview":"$40.00","textChars":6,"textLines":1,"bbox":[590,388,74,17]}
-{"kind":"shape","id":"sh/nmpwbyto","slide":1,"name":"row-bg-1","bbox":[66,425,608,44]}
-{"kind":"textbox","id":"sh/2lgv2ds3","slide":1,"name":"row-code-1","text":"80053","textPreview":"80053","textChars":5,"textLines":1,"bbox":[78,432,52,13]}
-{"kind":"textbox","id":"sh/pored8be","slide":1,"name":"row-label-1","text":"Comprehensive metabolic panel","textPreview":"Comprehensive metabolic panel","textChars":29,"textLines":1,"bbox":[78,446,310,17]}
-{"kind":"textbox","id":"sh/onyd43a9","slide":1,"name":"row-billed-1","text":"$168.00","textPreview":"$168.00","textChars":7,"textLines":1,"bbox":[420,440,74,17]}
-{"kind":"textbox","id":"sh/bq9wfitk","slide":1,"name":"row-allowed-1","text":"$76.00","textPreview":"$76.00","textChars":6,"textLines":1,"bbox":[505,440,74,17]}
-{"kind":"textbox","id":"sh/ap0f6dsz","slide":1,"name":"row-owe-1","text":"$20.00","textPreview":"$20.00","textChars":6,"textLines":1,"bbox":[590,440,74,17]}
-{"kind":"shape","id":"sh/u5s7yl4n","slide":1,"name":"row-bg-2","bbox":[66,477,608,44]}
-{"kind":"textbox","id":"sh/v61orql8","slide":1,"name":"row-code-2","text":"ADJ","textPreview":"ADJ","textChars":3,"textLines":1,"bbox":[78,484,52,13]}
-{"kind":"textbox","id":"sh/w7ap0vmd","slide":1,"name":"row-label-2","text":"Network discount and plan payment","textPreview":"Network discount and plan payment","textChars":33,"textLines":1,"bbox":[78,498,310,17]}
-{"kind":"textbox","id":"sh/h8jqt03y","slide":1,"name":"row-billed-2","text":"−$282.00","textPreview":"−$282.00","textChars":8,"textLines":1,"bbox":[420,492,74,17]}
-{"kind":"textbox","id":"sh/i9s72l4j","slide":1,"name":"row-allowed-2","text":"Applied","textPreview":"Applied","textChars":7,"textLines":1,"bbox":[505,492,74,17]}
-{"kind":"textbox","id":"sh/ja18vql4","slide":1,"name":"row-owe-2","text":"$0.00","textPreview":"$0.00","textChars":5,"textLines":1,"bbox":[590,492,74,17]}
-{"kind":"shape","id":"sh/4bap4vmp","slide":1,"name":"not-bill","bbox":[66,538,608,31]}
-{"kind":"textbox","id":"sh/5c3qx03a","slide":1,"name":"not-bill-label","text":"NOT A BILL","textPreview":"NOT A BILL","textChars":10,"textLines":1,"bbox":[79,546,82,15]}
-{"kind":"textbox","id":"sh/yd87q14f","slide":1,"name":"not-bill-copy","text":"Compare with the provider invoice before paying; every identity and amount shown is synthetic.","textPreview":"Compare with the provider invoice before paying; every identity and amount shown is synthetic.","textChars":94,"textLines":1,"bbox":[170,544,488,18]}
-{"kind":"shape","id":"sh/zehoj650","slide":1,"name":"document-to-answer","bbox":[685,185,44,12]}
-{"kind":"textbox","id":"sh/1snap4ni","slide":1,"name":"question-label","text":"BUNDLED DEMO QUESTION","textPreview":"BUNDLED DEMO QUESTION","textChars":21,"textLines":1,"bbox":[738,130,240,18]}
-{"kind":"shape","id":"sh/0re9wz6x","slide":1,"name":"question","bbox":[738,153,500,62]}
-{"kind":"textbox","id":"sh/f65snu5c","slide":1,"name":"question-copy","text":"What is an Explanation of Benefits?","textPreview":"What is an Explanation of Benefits?","textChars":35,"textLines":1,"bbox":[758,172,460,23]}
-{"kind":"textbox","id":"sh/e5wrupor","slide":1,"name":"answer-label","text":"DETERMINISTIC EXPLANATION","textPreview":"DETERMINISTIC EXPLANATION","textChars":25,"textLines":1,"bbox":[738,232,260,18]}
-{"kind":"shape","id":"sh/pw7atone","slide":1,"name":"answer","bbox":[738,255,500,185]}
-{"kind":"textbox","id":"sh/ovet0j6t","slide":1,"name":"answer-lead","text":"An EOB is the insurer’s record of how a claim was processed—not a bill.","textPreview":"An EOB is the insurer’s record of how a claim was processed—not a bill.","textChars":71,"textLines":1,"bbox":[758,271,460,36]}
-{"kind":"textbox","id":"sh/nu5sre58","slide":1,"name":"number-0","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[758,320,20,20]}
-{"kind":"textbox","id":"sh/2twry9o3","slide":1,"name":"answer-label-0","text":"Amount billed","textPreview":"Amount billed","textChars":13,"textLines":1,"bbox":[788,321,130,18]}
-{"kind":"textbox","id":"sh/503ahkna","slide":1,"name":"answer-note-0","text":"provider submission","textPreview":"provider submission","textChars":19,"textLines":1,"bbox":[920,321,294,18]}
-{"kind":"textbox","id":"sh/4zu9of6p","slide":1,"name":"number-1","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[758,348,20,20]}
-{"kind":"textbox","id":"sh/wjy94fel","slide":1,"name":"answer-label-1","text":"Allowed amount","textPreview":"Allowed amount","textChars":14,"textLines":1,"bbox":[788,349,130,18]}
-{"kind":"textbox","id":"sh/xk7adkf6","slide":1,"name":"answer-note-1","text":"negotiated or recognized price","textPreview":"negotiated or recognized price","textChars":30,"textLines":1,"bbox":[920,349,294,18]}
-{"kind":"textbox","id":"sh/ahwr2pwf","slide":1,"name":"number-2","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[758,376,20,20]}
-{"kind":"textbox","id":"sh/vipsbax0","slide":1,"name":"answer-label-2","text":"Plan paid","textPreview":"Plan paid","textChars":9,"textLines":1,"bbox":[788,377,130,18]}
-{"kind":"textbox","id":"sh/k7yt8zeh","slide":1,"name":"answer-note-2","text":"insurance payment","textPreview":"insurance payment","textChars":17,"textLines":1,"bbox":[920,377,294,18]}
-{"kind":"textbox","id":"sh/587ah4v2","slide":1,"name":"number-3","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[758,404,20,20]}
-{"kind":"textbox","id":"sh/ilgb6pwr","slide":1,"name":"answer-label-3","text":"You may owe","textPreview":"You may owe","textChars":11,"textLines":1,"bbox":[788,405,130,18]}
-{"kind":"textbox","id":"sh/j6psfudw","slide":1,"name":"answer-note-3","text":"deductible, copay, coinsurance, or non-covered amount","textPreview":"deductible, copay, coinsurance, or non-covered amount","textChars":53,"textLines":1,"bbox":[920,405,294,18]}
-{"kind":"textbox","id":"sh/sbitczet","slide":1,"name":"sources-label","text":"PUBLIC GUIDANCE SHOWN WITH THE ANSWER","textPreview":"PUBLIC GUIDANCE SHOWN WITH THE ANSWER","textChars":37,"textLines":1,"bbox":[738,456,350,18]}
-{"kind":"textbox","id":"sh/tcral4ve","slide":1,"name":"source-tag-0","text":"[1]","textPreview":"[1]","textChars":3,"textLines":1,"bbox":[738,480,40,18]}
-{"kind":"textbox","id":"sh/nid4r21s","slide":1,"name":"source-publisher-0","text":"HealthCare.gov","textPreview":"HealthCare.gov","textChars":14,"textLines":1,"bbox":[782,480,120,18]}
-{"kind":"textbox","id":"sh/2h43yxk7","slide":1,"name":"source-topic-0","text":"understanding an insurance bill","textPreview":"understanding an insurance bill","textChars":31,"textLines":1,"bbox":[902,480,323,18]}
-{"kind":"shape","id":"sh/pkvmtcji","slide":1,"name":"source-rule-0","bbox":[782,503,443,0]}
-{"kind":"textbox","id":"sh/ojml072d","slide":1,"name":"source-tag-1","text":"[2]","textPreview":"[2]","textChars":3,"textLines":1,"bbox":[738,511,40,18]}
-{"kind":"textbox","id":"sh/fed4nilg","slide":1,"name":"source-publisher-1","text":"CMS","textPreview":"CMS","textChars":3,"textLines":1,"bbox":[782,511,120,18]}
-{"kind":"textbox","id":"sh/edk3udkv","slide":1,"name":"source-topic-1","text":"No Surprises Act consumer rights","textPreview":"No Surprises Act consumer rights","textChars":32,"textLines":1,"bbox":[902,511,323,18]}
-{"kind":"shape","id":"sh/1gvmps3m","slide":1,"name":"source-rule-1","bbox":[782,534,443,0]}
-{"kind":"textbox","id":"sh/0fmlwn21","slide":1,"name":"source-tag-2","text":"[3]","textPreview":"[3]","textChars":3,"textLines":1,"bbox":[738,542,40,18]}
-{"kind":"textbox","id":"sh/zax4zm10","slide":1,"name":"source-publisher-2","text":"CFPB","textPreview":"CFPB","textChars":4,"textLines":1,"bbox":[782,542,120,18]}
-{"kind":"textbox","id":"sh/y9on6hkf","slide":1,"name":"source-topic-2","text":"disputing a medical bill","textPreview":"disputing a medical bill","textChars":24,"textLines":1,"bbox":[902,542,323,18]}
-{"kind":"shape","id":"sh/a9k3m50v","slide":1,"name":"source-rule-2","bbox":[782,565,443,0]}
-{"kind":"shape","id":"sh/vatkva1g","slide":1,"name":"live-contract","bbox":[738,581,500,55]}
-{"kind":"textbox","id":"sh/wb2lofi1","slide":1,"name":"live-title","text":"LIVE MODE","textPreview":"LIVE MODE","textChars":9,"textLines":1,"bbox":[754,590,75,15]}
-{"kind":"textbox","id":"sh/xcb2xkjm","slide":1,"name":"live-copy","text":"retrieve ≤6  →  usable source text  →  context-only answer","textPreview":"retrieve ≤6  →  usable source text  →  context-only answer","textChars":58,"textLines":1,"bbox":[839,587,380,18]}
-{"kind":"textbox","id":"sh/ml0ji50z","slide":1,"name":"live-refusal","text":"no usable text  →  422 response before generation","textPreview":"no usable text  →  422 response before generation","textChars":49,"textLines":1,"bbox":[839,608,380,17]}
-{"kind":"shape","id":"sh/n69kra1k","slide":1,"name":"footer-rule","bbox":[42,651,1196,0]}
-{"kind":"textbox","id":"sh/87ilkfi5","slide":1,"name":"boundary","text":"EVIDENCE BOUNDARY","textPreview":"EVIDENCE BOUNDARY","textChars":17,"textLines":1,"bbox":[42,668,150,17]}
-{"kind":"textbox","id":"sh/98b2tkjq","slide":1,"name":"boundary-copy","text":"Fixture answer and sources are deterministic. No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textPreview":"Fixture answer and sources are deterministic. No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textChars":130,"textLines":1,"bbox":[202,664,1006,25]}
-{"kind":"textbox","id":"sh/eh0jel03","slide":1,"name":"sources","text":"Sources: app/page.tsx · app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts","textPreview":"Sources: app/page.tsx · app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts","textChars":82,"textLines":1,"bbox":[42,700,1196,13]}
-{"kind":"notes","id":"nt/yjapkp","slide":1,"text":""}
+{"kind":"deck","id":"pr/s889ek","name":"Deck"}
+{"kind":"layout","layoutId":"15bf0ef2-a692-4d52-b799-1c7e08baec90","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"11d4afb7-eefd-481c-bbd6-ee4560cf73b0","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/l3v999","slide":1,"title":"ClearBill keeps the explanation attached to the synthetic statement","textShapes":68}
+{"kind":"textbox","id":"sh/ozupk7i1","slide":1,"name":"title","text":"ClearBill keeps the explanation attached to the synthetic statement","textPreview":"ClearBill keeps the explanation attached to the synthetic statement","textChars":67,"textLines":1,"bbox":[42,24,1196,42]}
+{"kind":"textbox","id":"sh/3yl8r21g","slide":1,"name":"subtitle","text":"One EOB is annotated in place: the answer names the fields to compare, cites public guidance, and keeps live refusal separate from the fixture.","textPreview":"One EOB is annotated in place: the answer names the fields to compare, cites public guidance, and keeps live refusal separate from the fi...","textChars":143,"textLines":1,"bbox":[42,71,1196,25]}
+{"kind":"shape","id":"sh/2xc7ih0b","slide":1,"name":"header-rule","bbox":[42,109,1196,0]}
+{"kind":"textbox","id":"sh/do3qxwzy","slide":1,"name":"document-label","text":"SYNTHETIC EXPLANATION OF BENEFITS","textPreview":"SYNTHETIC EXPLANATION OF BENEFITS","textChars":33,"textLines":1,"bbox":[42,130,340,18]}
+{"kind":"shape","id":"sh/cnu9orid","slide":1,"name":"document","bbox":[42,153,660,431]}
+{"kind":"shape","id":"sh/bml8vmhs","slide":1,"name":"document-accent","bbox":[42,153,8,431]}
+{"kind":"textbox","id":"sh/qlcrmh07","slide":1,"name":"doc-eyebrow","text":"EXPLANATION OF BENEFITS","textPreview":"EXPLANATION OF BENEFITS","textChars":23,"textLines":1,"bbox":[66,172,250,16]}
+{"kind":"textbox","id":"sh/tsjqlsje","slide":1,"name":"doc-title","text":"Claim 04-2719","textPreview":"Claim 04-2719","textChars":13,"textLines":1,"bbox":[66,194,260,28]}
+{"kind":"textbox","id":"sh/srapcnit","slide":1,"name":"doc-subtitle","text":"Northstar Internal Medicine · Sample PPO plan","textPreview":"Northstar Internal Medicine · Sample PPO plan","textChars":45,"textLines":1,"bbox":[66,224,320,17]}
+{"kind":"textbox","id":"sh/6lk72hwn","slide":1,"name":"doc-meta","text":"Sample member\nApr 10, 2026 service\nApr 18, 2026 processed\nFinalized","textPreview":"Sample member | Apr 10, 2026 service | Apr 18, 2026 processed | Finalized","textChars":67,"textLines":4,"bbox":[510,171,164,70]}
+{"kind":"shape","id":"sh/7mt8bmxs","slide":1,"name":"doc-rule-1","bbox":[66,254,608,0]}
+{"kind":"shape","id":"sh/sn2p4red","slide":1,"name":"summary-0","bbox":[66,270,142,62]}
+{"kind":"textbox","id":"sh/tobqdwfy","slide":1,"name":"summary-label-0","text":"PROVIDER BILLED","textPreview":"PROVIDER BILLED","textChars":15,"textLines":1,"bbox":[76,279,122,14]}
+{"kind":"textbox","id":"sh/u9k761wj","slide":1,"name":"summary-value-0","text":"$593.00","textPreview":"$593.00","textChars":7,"textLines":1,"bbox":[76,300,122,23]}
+{"kind":"shape","id":"sh/fat8fmx4","slide":1,"name":"summary-1","bbox":[218,270,142,62]}
+{"kind":"textbox","id":"sh/gb2p8rep","slide":1,"name":"summary-label-1","text":"PLAN DISCOUNTS","textPreview":"PLAN DISCOUNTS","textChars":14,"textLines":1,"bbox":[228,279,122,14]}
+{"kind":"textbox","id":"sh/hcbqhwfa","slide":1,"name":"summary-value-1","text":"−$282.00","textPreview":"−$282.00","textChars":8,"textLines":1,"bbox":[228,300,122,23]}
+{"kind":"shape","id":"sh/2d47a1wf","slide":1,"name":"summary-2","bbox":[370,270,142,62]}
+{"kind":"textbox","id":"sh/3ed8j6x0","slide":1,"name":"summary-label-2","text":"PLAN PAID","textPreview":"PLAN PAID","textChars":9,"textLines":1,"bbox":[380,279,122,14]}
+{"kind":"textbox","id":"sh/zido76t8","slide":1,"name":"summary-value-2","text":"−$251.00","textPreview":"−$251.00","textChars":8,"textLines":1,"bbox":[380,300,122,23]}
+{"kind":"shape","id":"sh/eh47y1cn","slide":1,"name":"summary-3","bbox":[522,270,142,62]}
+{"kind":"textbox","id":"sh/lkf69gbe","slide":1,"name":"summary-label-3","text":"YOU MAY OWE","textPreview":"YOU MAY OWE","textChars":11,"textLines":1,"bbox":[532,279,122,14]}
+{"kind":"textbox","id":"sh/0jmp0but","slide":1,"name":"summary-value-3","text":"$60.00","textPreview":"$60.00","textChars":6,"textLines":1,"bbox":[532,300,122,23]}
+{"kind":"textbox","id":"sh/redo36dc","slide":1,"name":"service-head","text":"SERVICE","textPreview":"SERVICE","textChars":7,"textLines":1,"bbox":[66,350,260,15]}
+{"kind":"textbox","id":"sh/qd47u1cr","slide":1,"name":"billed-head","text":"BILLED","textPreview":"BILLED","textChars":6,"textLines":1,"bbox":[420,350,74,15]}
+{"kind":"textbox","id":"sh/dgv65wv2","slide":1,"name":"allowed-head","text":"ALLOWED","textPreview":"ALLOWED","textChars":7,"textLines":1,"bbox":[505,350,74,15]}
+{"kind":"textbox","id":"sh/cfmpwruh","slide":1,"name":"owe-head","text":"YOU OWE","textPreview":"YOU OWE","textChars":7,"textLines":1,"bbox":[590,350,74,15]}
+{"kind":"shape","id":"sh/3qtozmd0","slide":1,"name":"row-bg-0","bbox":[66,373,608,44]}
+{"kind":"textbox","id":"sh/2pknqhcf","slide":1,"name":"row-code-0","text":"99214","textPreview":"99214","textChars":5,"textLines":1,"bbox":[78,380,52,13]}
+{"kind":"textbox","id":"sh/svil0nad","slide":1,"name":"row-label-0","text":"Office visit, established patient","textPreview":"Office visit, established patient","textChars":33,"textLines":1,"bbox":[78,394,310,17]}
+{"kind":"textbox","id":"sh/twrmtsby","slide":1,"name":"row-billed-0","text":"$425.00","textPreview":"$425.00","textChars":7,"textLines":1,"bbox":[420,388,74,17]}
+{"kind":"textbox","id":"sh/6t03yds7","slide":1,"name":"row-allowed-0","text":"$235.00","textPreview":"$235.00","textChars":7,"textLines":1,"bbox":[505,388,74,17]}
+{"kind":"textbox","id":"sh/7u94rits","slide":1,"name":"row-owe-0","text":"$40.00","textPreview":"$40.00","textChars":6,"textLines":1,"bbox":[590,388,74,17]}
+{"kind":"shape","id":"sh/gjil47a9","slide":1,"name":"row-bg-1","bbox":[66,425,608,44]}
+{"kind":"textbox","id":"sh/hkrmxsru","slide":1,"name":"row-code-1","text":"80053","textPreview":"80053","textChars":5,"textLines":1,"bbox":[78,432,52,13]}
+{"kind":"textbox","id":"sh/uh032xsj","slide":1,"name":"row-label-1","text":"Comprehensive metabolic panel","textPreview":"Comprehensive metabolic panel","textChars":29,"textLines":1,"bbox":[78,446,310,17]}
+{"kind":"textbox","id":"sh/fi94v2t4","slide":1,"name":"row-billed-1","text":"$168.00","textPreview":"$168.00","textChars":7,"textLines":1,"bbox":[420,440,74,17]}
+{"kind":"textbox","id":"sh/wnyls3a5","slide":1,"name":"row-allowed-1","text":"$76.00","textPreview":"$76.00","textChars":6,"textLines":1,"bbox":[505,440,74,17]}
+{"kind":"textbox","id":"sh/xo7ml8bq","slide":1,"name":"row-owe-1","text":"$20.00","textPreview":"$20.00","textChars":6,"textLines":1,"bbox":[590,440,74,17]}
+{"kind":"shape","id":"sh/pw3mhsf6","slide":1,"name":"row-bg-2","bbox":[66,477,608,44]}
+{"kind":"textbox","id":"sh/ovu5o7el","slide":1,"name":"row-code-2","text":"ADJ","textPreview":"ADJ","textChars":3,"textLines":1,"bbox":[78,484,52,13]}
+{"kind":"textbox","id":"sh/nu14f2x0","slide":1,"name":"row-label-2","text":"Network discount and plan payment","textPreview":"Network discount and plan payment","textChars":33,"textLines":1,"bbox":[78,498,310,17]}
+{"kind":"textbox","id":"sh/2ts3mxwv","slide":1,"name":"row-billed-2","text":"−$282.00","textPreview":"−$282.00","textChars":8,"textLines":1,"bbox":[420,492,74,17]}
+{"kind":"textbox","id":"sh/1sjmdsfa","slide":1,"name":"row-allowed-2","text":"Applied","textPreview":"Applied","textChars":7,"textLines":1,"bbox":[505,492,74,17]}
+{"kind":"textbox","id":"sh/0ralknep","slide":1,"name":"row-owe-2","text":"$0.00","textPreview":"$0.00","textChars":5,"textLines":1,"bbox":[590,492,74,17]}
+{"kind":"shape","id":"sh/fq14bix4","slide":1,"name":"not-bill","bbox":[66,538,608,31]}
+{"kind":"textbox","id":"sh/eps3idwj","slide":1,"name":"not-bill-label","text":"NOT A BILL","textPreview":"NOT A BILL","textChars":10,"textLines":1,"bbox":[79,546,82,15]}
+{"kind":"textbox","id":"sh/dojm98fy","slide":1,"name":"not-bill-copy","text":"Compare with the provider invoice before paying; every identity and amount shown is synthetic.","textPreview":"Compare with the provider invoice before paying; every identity and amount shown is synthetic.","textChars":94,"textLines":1,"bbox":[170,544,488,18]}
+{"kind":"shape","id":"sh/s3algned","slide":1,"name":"document-to-answer","bbox":[685,185,44,12]}
+{"kind":"textbox","id":"sh/ix4bup8z","slide":1,"name":"question-label","text":"BUNDLED DEMO QUESTION","textPreview":"BUNDLED DEMO QUESTION","textChars":21,"textLines":1,"bbox":[738,130,240,18]}
+{"kind":"shape","id":"sh/jyxs3u9k","slide":1,"name":"question","bbox":[738,153,500,62]}
+{"kind":"textbox","id":"sh/4j6twzq5","slide":1,"name":"question-copy","text":"What is an Explanation of Benefits?","textPreview":"What is an Explanation of Benefits?","textChars":35,"textLines":1,"bbox":[758,172,460,23]}
+{"kind":"textbox","id":"sh/5kfa5krq","slide":1,"name":"answer-label","text":"DETERMINISTIC EXPLANATION","textPreview":"DETERMINISTIC EXPLANATION","textChars":25,"textLines":1,"bbox":[738,232,260,18]}
+{"kind":"shape","id":"sh/ut4rq583","slide":1,"name":"answer","bbox":[738,255,500,185]}
+{"kind":"textbox","id":"sh/vudsza9o","slide":1,"name":"answer-lead","text":"An EOB is the insurer’s record of how a claim was processed—not a bill.","textPreview":"An EOB is the insurer’s record of how a claim was processed—not a bill.","textChars":71,"textLines":1,"bbox":[758,271,460,36]}
+{"kind":"textbox","id":"sh/wvmtsfq9","slide":1,"name":"number-0","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[758,320,20,20]}
+{"kind":"textbox","id":"sh/hwva1kru","slide":1,"name":"answer-label-0","text":"Amount billed","textPreview":"Amount billed","textChars":13,"textLines":1,"bbox":[788,321,130,18]}
+{"kind":"textbox","id":"sh/mpkrm587","slide":1,"name":"answer-note-0","text":"provider submission","textPreview":"provider submission","textChars":19,"textLines":1,"bbox":[920,321,294,18]}
+{"kind":"textbox","id":"sh/7qtsva9c","slide":1,"name":"number-1","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[758,348,20,20]}
+{"kind":"textbox","id":"sh/bu9836p4","slide":1,"name":"answer-label-1","text":"Allowed amount","textPreview":"Allowed amount","textChars":14,"textLines":1,"bbox":[788,349,130,18]}
+{"kind":"textbox","id":"sh/q907u1oz","slide":1,"name":"answer-note-1","text":"negotiated or recognized price","textPreview":"negotiated or recognized price","textChars":30,"textLines":1,"bbox":[920,349,294,18]}
+{"kind":"textbox","id":"sh/dwrq5g7a","slide":1,"name":"number-2","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[758,376,20,20]}
+{"kind":"textbox","id":"sh/cvipwb6p","slide":1,"name":"answer-label-2","text":"Plan paid","textPreview":"Plan paid","textChars":9,"textLines":1,"bbox":[788,377,130,18]}
+{"kind":"textbox","id":"sh/zy9876pg","slide":1,"name":"answer-note-2","text":"insurance payment","textPreview":"insurance payment","textChars":17,"textLines":1,"bbox":[920,377,294,18]}
+{"kind":"textbox","id":"sh/yx07y1ov","slide":1,"name":"number-3","text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[758,404,20,20]}
+{"kind":"textbox","id":"sh/l0bq9g7m","slide":1,"name":"answer-label-3","text":"You may owe","textPreview":"You may owe","textChars":11,"textLines":1,"bbox":[788,405,130,18]}
+{"kind":"textbox","id":"sh/kz2p0b61","slide":1,"name":"answer-note-3","text":"deductible, copay, coinsurance, or non-covered amount","textPreview":"deductible, copay, coinsurance, or non-covered amount","textChars":53,"textLines":1,"bbox":[920,405,294,18]}
+{"kind":"textbox","id":"sh/f2povmpw","slide":1,"name":"sources-label","text":"PUBLIC GUIDANCE SHOWN WITH THE ANSWER","textPreview":"PUBLIC GUIDANCE SHOWN WITH THE ANSWER","textChars":37,"textLines":1,"bbox":[738,456,350,18]}
+{"kind":"textbox","id":"sh/e1g7mhor","slide":1,"name":"source-tag-0","text":"[1]","textPreview":"[1]","textChars":3,"textLines":1,"bbox":[738,480,40,18]}
+{"kind":"textbox","id":"sh/47u5wnm9","slide":1,"name":"source-publisher-0","text":"HealthCare.gov","textPreview":"HealthCare.gov","textChars":14,"textLines":1,"bbox":[782,480,120,18]}
+{"kind":"textbox","id":"sh/583mpsnu","slide":1,"name":"source-topic-0","text":"understanding an insurance bill","textPreview":"understanding an insurance bill","textChars":31,"textLines":1,"bbox":[902,480,323,18]}
+{"kind":"shape","id":"sh/i5cnud4j","slide":1,"name":"source-rule-0","bbox":[782,503,443,0]}
+{"kind":"textbox","id":"sh/j6l4ni5o","slide":1,"name":"source-tag-1","text":"[2]","textPreview":"[2]","textChars":3,"textLines":1,"bbox":[738,511,40,18]}
+{"kind":"textbox","id":"sh/wjuls3md","slide":1,"name":"source-publisher-1","text":"CMS","textPreview":"CMS","textChars":3,"textLines":1,"bbox":[782,511,120,18]}
+{"kind":"textbox","id":"sh/h43m18ny","slide":1,"name":"source-topic-1","text":"No Surprises Act consumer rights","textPreview":"No Surprises Act consumer rights","textChars":32,"textLines":1,"bbox":[902,511,323,18]}
+{"kind":"shape","id":"sh/uhc3qt47","slide":1,"name":"source-rule-1","bbox":[782,534,443,0]}
+{"kind":"textbox","id":"sh/vil4zy5s","slide":1,"name":"source-tag-2","text":"[3]","textPreview":"[3]","textChars":3,"textLines":1,"bbox":[738,542,40,18]}
+{"kind":"textbox","id":"sh/gfe547mh","slide":1,"name":"source-publisher-2","text":"CFPB","textPreview":"CFPB","textChars":4,"textLines":1,"bbox":[782,542,120,18]}
+{"kind":"textbox","id":"sh/107mxcn2","slide":1,"name":"source-topic-2","text":"disputing a medical bill","textPreview":"disputing a medical bill","textChars":24,"textLines":1,"bbox":[902,542,323,18]}
+{"kind":"shape","id":"sh/9grix4vm","slide":1,"name":"source-rule-2","bbox":[782,565,443,0]}
+{"kind":"shape","id":"sh/ofih4je1","slide":1,"name":"live-contract","bbox":[738,581,500,55]}
+{"kind":"textbox","id":"sh/nep0vedg","slide":1,"name":"live-title","text":"LIVE MODE","textPreview":"LIVE MODE","textChars":9,"textLines":1,"bbox":[754,590,75,15]}
+{"kind":"textbox","id":"sh/mdgz29wv","slide":1,"name":"live-copy","text":"retrieve ≤6  →  usable source text  →  context-only answer","textPreview":"retrieve ≤6  →  usable source text  →  context-only answer","textChars":58,"textLines":1,"bbox":[839,587,380,18]}
+{"kind":"textbox","id":"sh/x4ri1ovi","slide":1,"name":"live-refusal","text":"no usable text  →  422 response before generation","textPreview":"no usable text  →  422 response before generation","textChars":49,"textLines":1,"bbox":[839,608,380,17]}
+{"kind":"shape","id":"sh/wji18jex","slide":1,"name":"footer-rule","bbox":[42,651,1196,0]}
+{"kind":"textbox","id":"sh/bi90zedc","slide":1,"name":"boundary","text":"EVIDENCE BOUNDARY","textPreview":"EVIDENCE BOUNDARY","textChars":17,"textLines":1,"bbox":[42,668,150,17]}
+{"kind":"textbox","id":"sh/ah0z69wr","slide":1,"name":"boundary-copy","text":"Fixture answer and sources are deterministic. No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textPreview":"Fixture answer and sources are deterministic. No coverage, correctness, compliance, retrieval-quality, or financial-outcome claim.","textChars":130,"textLines":1,"bbox":[202,664,1006,25]}
+{"kind":"textbox","id":"sh/d87ipkfe","slide":1,"name":"sources","text":"Sources: app/page.tsx · app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts","textPreview":"Sources: app/page.tsx · app/data/demo.ts · app/lib/chat.ts · app/api/chat/route.ts","textChars":82,"textLines":1,"bbox":[42,700,1196,13]}
+{"kind":"notes","id":"nt/l3v999","slide":1,"text":""}

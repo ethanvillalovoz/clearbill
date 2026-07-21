@@ -35,35 +35,35 @@
   ],
   "outputs": [
     {
-      "bytes": 18556,
+      "bytes": 18561,
       "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx",
       "role": "editable_pptx",
-      "sha256": "645ff9b98cb0003923874a3588bc4f85c252037bc827f432fc891099e86d75ba"
+      "sha256": "e40b52c8a00d4ed0179d52854a7f71c011a8b5a16e644189ea2161a7e508e658"
     },
     {
-      "bytes": 724047,
+      "bytes": 724298,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg",
       "role": "svg",
-      "sha256": "48726cc3cd44eefd48afe463d989633d8c43277fb50d576815c0351c61d97815"
+      "sha256": "39385aa26c9b14294e375ea13d36b67a74b68e0cf373555e4094eb9473f1eeab"
     },
     {
-      "bytes": 241950,
+      "bytes": 239719,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png",
       "role": "png",
-      "sha256": "710534a77316cd80773d2067996a7117f43a1a90014890544471412232b222c6"
+      "sha256": "6c1317c123b15fc7965637ace52e9356321d26e33d42968ab4af76eb3b75335b"
     },
     {
-      "bytes": 142261,
+      "bytes": 142260,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf",
       "role": "pdf",
-      "sha256": "f8d40b6000da67031a8e90e27c1e4b13da697501628a960602283295963ae29c"
+      "sha256": "726f6e7bd89574904f94bd92dacb106fbb6e28774eca5984ade3f9795165e108"
     }
   ],
   "processing_notes": [
-    "Native editable annotated-document figure exported through LibreOffice; no raster images; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
+    "Native editable annotated-document figure with an ultramarine, signal-yellow, violet, and coral clinical palette; exported through LibreOffice; no raster images; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
   ],
   "schema_version": 1,
-  "source_revision": "6fecd3609890d1835419449727caf93d50dbd6bc",
+  "source_revision": "9f452efa47d8a3d5d5ab3ba900b8ae6d8d6a6e9a",
   "selection_note": "Complete default synthetic statement and bundled EOB question; all three committed references and the live refusal branch represented.",
   "target_width_in": 7.16,
   "venue": "GitHub README"
