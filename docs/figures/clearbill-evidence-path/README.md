@@ -10,7 +10,7 @@ This directory contains the public document-and-retrieval overview and its trace
 | `exports/clearbill-evidence-path.svg` | README-ready vector export |
 | `exports/clearbill-evidence-path.png` | Raster review export |
 | `exports/clearbill-evidence-path.pdf` | Print/preflight artifact |
-| `media/demo-answer.png` | Completed local deterministic demo capture |
+| `media/demo-answer.png` | Archival local demo capture; not an input to the vector figure |
 | `preflight/` | PowerPoint, final-size, grayscale, and PDF checks |
 
-The demo capture contains only synthetic data. The figure distinguishes deterministic demo evidence from live retrieval behavior and does not claim billing correctness or coverage determination.
+The annotated document is reconstructed from the maintained synthetic fixture rather than embedded as a screenshot. It distinguishes deterministic demo evidence from live retrieval behavior and does not claim billing correctness or coverage determination.

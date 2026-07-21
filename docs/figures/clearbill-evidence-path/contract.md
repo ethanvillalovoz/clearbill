@@ -4,13 +4,17 @@
 
 This figure should allow a skeptical technical reviewer to understand how ClearBill keeps a synthetic statement, bounded question, retrieved public guidance, context-only generation, source inspection, and refusal behavior separate.
 
+## Figure form
+
+An annotated-document explainer: the synthetic EOB remains the dominant visual, the deterministic answer names the four statement fields a reader should compare, and the three public references stay attached to that explanation. Live retrieval and refusal appear only as a compact implementation boundary, not as a second generic pipeline.
+
 ## Supported claim
 
 The credential-free demo exposes a complete synthetic EOB and deterministic answer beside three public guidance references. In live mode, the server validates a bounded message history, embeds the latest user question, retrieves at most six Astra passages, refuses when no usable text is returned, and otherwise asks the configured model to answer only from the assembled context.
 
 ## Evidence used
 
-- `docs/figures/clearbill-evidence-path/media/demo-answer.png` for the completed deterministic EOB review state.
+- `nextjs-clearbill-ai/app/page.tsx` for the exact synthetic claim identifier, totals, and line-item values reconstructed in the annotated statement.
 - `nextjs-clearbill-ai/app/data/demo.ts` for the three demo sources and fixture answers.
 - `nextjs-clearbill-ai/app/lib/chat.ts` for input bounds and the context-only prompt.
 - `nextjs-clearbill-ai/app/api/chat/route.ts` for query embedding, six-passage retrieval, refusal, source deduplication, timeout, and response assembly.
