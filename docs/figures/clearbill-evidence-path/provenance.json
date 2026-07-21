@@ -3,10 +3,10 @@
   "figure_id": "clearbill-evidence-path",
   "inputs": [
     {
-      "bytes": 170971,
-      "path": "docs/figures/clearbill-evidence-path/media/demo-answer.png",
-      "role": "demo_capture",
-      "sha256": "c8fc38e7131e0e0a30dfc11edc28f588b59df27c89bdeb8fc02442b5cb81412d"
+      "bytes": 10512,
+      "path": "nextjs-clearbill-ai/app/page.tsx",
+      "role": "synthetic_statement",
+      "sha256": "efe1bda8ffe4e465b5309bbaea57e788eafb41b781a0b0ba83b91357485a64fa"
     },
     {
       "bytes": 2760,
@@ -35,35 +35,35 @@
   ],
   "outputs": [
     {
-      "bytes": 176842,
+      "bytes": 18556,
       "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx",
       "role": "editable_pptx",
-      "sha256": "aefa22e74f766d3bbad0822ee6075b4fefe94c1f4876dfcb7fb364f568caf316"
+      "sha256": "645ff9b98cb0003923874a3588bc4f85c252037bc827f432fc891099e86d75ba"
     },
     {
-      "bytes": 687549,
+      "bytes": 724047,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg",
       "role": "svg",
-      "sha256": "a80fb5b07f2ad323f2b4d63c4705f9434ba38284bfc76f28cd2c1ab743362fb3"
+      "sha256": "48726cc3cd44eefd48afe463d989633d8c43277fb50d576815c0351c61d97815"
     },
     {
-      "bytes": 404130,
+      "bytes": 241950,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png",
       "role": "png",
-      "sha256": "b15cd0a39352ea615c664e03660958ffc6313b08c142646d8b2408fcad04316d"
+      "sha256": "710534a77316cd80773d2067996a7117f43a1a90014890544471412232b222c6"
     },
     {
-      "bytes": 223216,
+      "bytes": 142261,
       "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf",
       "role": "pdf",
-      "sha256": "a8863de78e0ee53a60d52850d4bf31a6c3ea66f6ed793abb08041d1339cf14d3"
+      "sha256": "f8d40b6000da67031a8e90e27c1e4b13da697501628a960602283295963ae29c"
     }
   ],
   "processing_notes": [
-    "Local deterministic demo captured at 1920x1080; editable composition exported through LibreOffice; final-size and grayscale renders inspected manually."
+    "Native editable annotated-document figure exported through LibreOffice; no raster images; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
   ],
   "schema_version": 1,
-  "source_revision": "3ae3dada1fc27ad532e75fdce9682c2f6ef4fcc5",
+  "source_revision": "6fecd3609890d1835419449727caf93d50dbd6bc",
   "selection_note": "Complete default synthetic statement and bundled EOB question; all three committed references and the live refusal branch represented.",
   "target_width_in": 7.16,
   "venue": "GitHub README"
