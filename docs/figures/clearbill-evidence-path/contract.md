@@ -10,7 +10,7 @@ A shared-state evidence-plane schematic. Offline corpus construction enters a do
 
 ## Visual encoding
 
-The figure uses a restrained data-system palette: blue marks corpus construction, teal marks the shared embedding/vector representation, indigo marks the online question path, amber marks the evidence gate, green marks grounded generation, and coral marks refusal. Topology and labels remain redundant with color.
+The figure directly reuses ClearBill's product tokens on a paper background: blue marks corpus and question flow, teal marks embedding and grounded prompting, yellow marks shared evidence and its gate, and coral marks refusal. Topology and labels remain redundant with color.
 
 ## Supported claim
 

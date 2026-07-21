@@ -8,16 +8,16 @@
     {"bytes": 340, "path": "nextjs-clearbill-ai/app/types.ts", "role": "response_contract", "sha256": "df8f1a17a6d996edb6b7dcd674d13378908680a9348447061a7e93cb65107990"}
   ],
   "outputs": [
-    {"bytes": 18430, "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx", "role": "editable_pptx", "sha256": "d2465fef37f55e13bc7306a3910f78e80ffcd373d08af226780f26d28658c67a"},
-    {"bytes": 592087, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg", "role": "svg", "sha256": "62a8660d74b32e1494d3b3496c065ca4039363ffea24e215a8927d181fd9250e"},
-    {"bytes": 172044, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png", "role": "png", "sha256": "9660cb8ce68128dc9afd404f4e5747c066de3606a10fbaa8e2fb0cb5c9b1acfa"},
-    {"bytes": 137598, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf", "role": "pdf", "sha256": "7ab91f2e5579753cfe0b7a4e62f427ae8038d0e885dbaa1e6c2dd1a233dfabc1"}
+    {"bytes": 18407, "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx", "role": "editable_pptx", "sha256": "a548529f7a5859a65846dd737984c8c42173291d6a73cdbc54257634db4d335c"},
+    {"bytes": 592043, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg", "role": "svg", "sha256": "f2842511b069ebad342e456862deb57f509da9a3615d6b4e0eea1ccc984b9951"},
+    {"bytes": 173456, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png", "role": "png", "sha256": "06c636c5b2331c6eb67125f147edef8d3b57b04d1d8fb28abedb428e7830c628"},
+    {"bytes": 137558, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf", "role": "pdf", "sha256": "848586f5b3140ef04565079084f5ea29baffe56489e7836fc674d2e598c40f9d"}
   ],
   "processing_notes": [
-    "Native editable shared-state evidence-plane schematic with offline and online inputs converging on Astra DB and one explicit refuse-or-generate evidence gate; exported through LibreOffice; no raster images in the PDF; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
+    "Native editable shared-state evidence-plane schematic using ClearBill's navy, blue, yellow, teal, and coral product tokens; offline and online inputs converge on Astra DB and one explicit refuse-or-generate evidence gate; exported through LibreOffice; no raster images in the PDF; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
   ],
   "schema_version": 1,
-  "source_revision": "23bba4e985da8bb97d74c039ff0060b13ea0ca50",
+  "source_revision": "0d312e5f4cf86e329c1e52255ac6c54bbc247a20",
   "selection_note": "Only maintained ingestion, validation, retrieval, refusal, generation, and response branches are represented; no retrieval output or medical conclusion is shown.",
   "target_width_in": 7.16,
   "venue": "GitHub README"
