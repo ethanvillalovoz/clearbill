@@ -1,39 +1,37 @@
-# Figure contract: ClearBill evidence path
+# Figure contract: ClearBill RAG architecture
 
 ## Communication job
 
-This figure should allow a skeptical technical reviewer to understand how ClearBill keeps a synthetic statement, bounded question, retrieved public guidance, context-only generation, source inspection, and refusal behavior separate.
+This figure should let a technical reviewer follow ClearBill from an offline public-guidance corpus build into the shared vector collection, then through the online retrieve, refuse-or-generate, and cited-response path.
 
 ## Figure form
 
-An annotated-document explainer: the synthetic EOB remains the dominant visual, the deterministic answer names the four statement fields a reader should compare, and the three public references stay attached to that explanation. Live retrieval and refusal appear only as a compact implementation boundary, not as a second generic pipeline.
+A two-lane system architecture. The offline lane extracts and chunks 18 maintained public URLs, encodes them with MiniLM, and writes source-bearing vectors. The online lane validates the latest question, uses the same embedding space, retrieves at most six usable passages, refuses on empty evidence, or sends a context-only prompt to the hosted model.
 
 ## Visual encoding
 
-The figure uses a clinical editorial palette: ultramarine binds the synthetic statement to its question and public references, signal yellow isolates the patient-responsibility amount and warning strip, violet separates deterministic explanation from live retrieval, and coral marks refusal and evidence boundaries. Every colored role also carries a text label or spatial distinction.
+The figure uses a clinical systems palette: blue identifies corpus construction and the successful response, cyan identifies the shared embedding space, amber marks shared retrieval state, violet traces online inference, and coral marks refusal. Every role is also labeled.
 
 ## Supported claim
 
-The credential-free demo exposes a complete synthetic EOB and deterministic answer beside three public guidance references. In live mode, the server validates a bounded message history, embeds the latest user question, retrieves at most six Astra passages, refuses when no usable text is returned, and otherwise asks the configured model to answer only from the assembled context.
+One maintained seed path extracts 18 public guidance pages, chunks normalized text at 512 characters with 100-character overlap, creates normalized 384-dimensional MiniLM vectors, and stores source metadata in Astra DB. The live route validates a bounded message history, embeds the latest user question with the same model, retrieves at most six passages, refuses when none contain usable text, and otherwise returns a context-only model answer with up to four deduplicated sources.
 
 ## Evidence used
 
-- `nextjs-clearbill-ai/app/page.tsx` for the exact synthetic claim identifier, totals, and line-item values reconstructed in the annotated statement.
-- `nextjs-clearbill-ai/app/data/demo.ts` for the three demo sources and fixture answers.
 - `nextjs-clearbill-ai/app/lib/chat.ts` for input bounds and the context-only prompt.
 - `nextjs-clearbill-ai/app/api/chat/route.ts` for query embedding, six-passage retrieval, refusal, source deduplication, timeout, and response assembly.
-- `nextjs-clearbill-ai/scripts/loadDB.ts` for curated-source ingestion and chunk embedding.
+- `nextjs-clearbill-ai/scripts/loadDB.ts` for the maintained URL list, browser extraction, chunking, MiniLM embedding, and Astra writes.
+- `nextjs-clearbill-ai/app/types.ts` for the source-bearing response contract.
 
 ## Evidence boundary
 
-- Every displayed patient, provider, date, identifier, and amount is synthetic.
-- Demo answers are deterministic fixtures, not live retrieval or model output.
+- The diagram describes live-capable code but does not contain a live run, patient data, or model output.
 - The figure makes no medical, legal, insurance, financial, retrieval-quality, compliance, or outcome claim.
 - Retrieval relevance does not guarantee a correct explanation, and ClearBill does not determine coverage or whether a balance is owed.
 
-## Selection rule
+## Scope rule
 
-The figure uses the complete default synthetic statement after asking the bundled “What is an Explanation of Benefits?” question. The three committed demo references and the live no-evidence branch are shown without selecting favorable retrieval output.
+Only branches, bounds, and dependencies verified in maintained source are shown. No retrieval result, medical conclusion, benchmark, or hosted-model performance is implied.
 
 ## Delivery formats
 

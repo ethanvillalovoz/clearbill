@@ -1,70 +1,24 @@
 {
-  "claim": "ClearBill separates a complete synthetic statement review from bounded live retrieval, explicit no-evidence refusal, and context-only generation.",
+  "claim": "ClearBill connects an offline public-guidance corpus build to an online retrieve-refuse-or-generate RAG path through one shared Astra vector collection.",
   "figure_id": "clearbill-evidence-path",
   "inputs": [
-    {
-      "bytes": 10512,
-      "path": "nextjs-clearbill-ai/app/page.tsx",
-      "role": "synthetic_statement",
-      "sha256": "efe1bda8ffe4e465b5309bbaea57e788eafb41b781a0b0ba83b91357485a64fa"
-    },
-    {
-      "bytes": 2760,
-      "path": "nextjs-clearbill-ai/app/data/demo.ts",
-      "role": "demo_fixture",
-      "sha256": "a46cc07a832afd79633efcb033edbf569721002071bd2f2440f603a98bb33b58"
-    },
-    {
-      "bytes": 2376,
-      "path": "nextjs-clearbill-ai/app/lib/chat.ts",
-      "role": "prompt_contract",
-      "sha256": "59438add29a135dbcae7bee9138f2c29f79eefc98b2151fd5b589577ccf24737"
-    },
-    {
-      "bytes": 5389,
-      "path": "nextjs-clearbill-ai/app/api/chat/route.ts",
-      "role": "live_route",
-      "sha256": "f31c3538ef461dadf82b83ae6da6dd99c1239256bb9908a75ad35d71f9166497"
-    },
-    {
-      "bytes": 5725,
-      "path": "nextjs-clearbill-ai/scripts/loadDB.ts",
-      "role": "ingestion",
-      "sha256": "eeec070b091e0f112449fc7664d0393f840e81cb7e49d47328c9943aec81a88d"
-    }
+    {"bytes": 5725, "path": "nextjs-clearbill-ai/scripts/loadDB.ts", "role": "offline_ingestion", "sha256": "eeec070b091e0f112449fc7664d0393f840e81cb7e49d47328c9943aec81a88d"},
+    {"bytes": 5389, "path": "nextjs-clearbill-ai/app/api/chat/route.ts", "role": "online_route", "sha256": "f31c3538ef461dadf82b83ae6da6dd99c1239256bb9908a75ad35d71f9166497"},
+    {"bytes": 2376, "path": "nextjs-clearbill-ai/app/lib/chat.ts", "role": "validation_and_prompt", "sha256": "59438add29a135dbcae7bee9138f2c29f79eefc98b2151fd5b589577ccf24737"},
+    {"bytes": 340, "path": "nextjs-clearbill-ai/app/types.ts", "role": "response_contract", "sha256": "df8f1a17a6d996edb6b7dcd674d13378908680a9348447061a7e93cb65107990"}
   ],
   "outputs": [
-    {
-      "bytes": 18561,
-      "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx",
-      "role": "editable_pptx",
-      "sha256": "e40b52c8a00d4ed0179d52854a7f71c011a8b5a16e644189ea2161a7e508e658"
-    },
-    {
-      "bytes": 724298,
-      "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg",
-      "role": "svg",
-      "sha256": "39385aa26c9b14294e375ea13d36b67a74b68e0cf373555e4094eb9473f1eeab"
-    },
-    {
-      "bytes": 239719,
-      "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png",
-      "role": "png",
-      "sha256": "6c1317c123b15fc7965637ace52e9356321d26e33d42968ab4af76eb3b75335b"
-    },
-    {
-      "bytes": 142260,
-      "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf",
-      "role": "pdf",
-      "sha256": "726f6e7bd89574904f94bd92dacb106fbb6e28774eca5984ade3f9795165e108"
-    }
+    {"bytes": 18844, "path": "docs/figures/clearbill-evidence-path/editable/clearbill-evidence-path.pptx", "role": "editable_pptx", "sha256": "4a803a4e6a063148efa0d13f184834288050d7461dca1b59a95759f5e04e09f2"},
+    {"bytes": 606320, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.svg", "role": "svg", "sha256": "0c01fcf7db6ce10e7fc62d4e0d227119137db12a2c7bd4af9a19ffd98327e976"},
+    {"bytes": 173868, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.png", "role": "png", "sha256": "c93bfb37707716c971a2ee438c4f20a8257e3ea05b5284e8c641b8747d364fad"},
+    {"bytes": 115165, "path": "docs/figures/clearbill-evidence-path/exports/clearbill-evidence-path.pdf", "role": "pdf", "sha256": "a85fdf5dffc10cac9599377436313494603f0815e6b5ba0685715e018c2111bd"}
   ],
   "processing_notes": [
-    "Native editable annotated-document figure with an ultramarine, signal-yellow, violet, and coral clinical palette; exported through LibreOffice; no raster images; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
+    "Native editable two-lane RAG architecture with distinct offline, shared-state, online, refusal, and trust roles; exported through LibreOffice; no raster images in the PDF; PowerPoint overflow, final-size, grayscale, and PDF checks completed."
   ],
   "schema_version": 1,
-  "source_revision": "9f452efa47d8a3d5d5ab3ba900b8ae6d8d6a6e9a",
-  "selection_note": "Complete default synthetic statement and bundled EOB question; all three committed references and the live refusal branch represented.",
+  "source_revision": "cae9642dc817e286c99fada06136f1ec0b5cb0a7",
+  "selection_note": "Only maintained ingestion, validation, retrieval, refusal, generation, and response branches are represented; no retrieval output or medical conclusion is shown.",
   "target_width_in": 7.16,
   "venue": "GitHub README"
 }
