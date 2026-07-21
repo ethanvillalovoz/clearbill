@@ -8,6 +8,10 @@ This figure should allow a skeptical technical reviewer to understand how ClearB
 
 An annotated-document explainer: the synthetic EOB remains the dominant visual, the deterministic answer names the four statement fields a reader should compare, and the three public references stay attached to that explanation. Live retrieval and refusal appear only as a compact implementation boundary, not as a second generic pipeline.
 
+## Visual encoding
+
+The figure uses a clinical editorial palette: ultramarine binds the synthetic statement to its question and public references, signal yellow isolates the patient-responsibility amount and warning strip, violet separates deterministic explanation from live retrieval, and coral marks refusal and evidence boundaries. Every colored role also carries a text label or spatial distinction.
+
 ## Supported claim
 
 The credential-free demo exposes a complete synthetic EOB and deterministic answer beside three public guidance references. In live mode, the server validates a bounded message history, embeds the latest user question, retrieves at most six Astra passages, refuses when no usable text is returned, and otherwise asks the configured model to answer only from the assembled context.
